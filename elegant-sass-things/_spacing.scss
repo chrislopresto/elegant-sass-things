@@ -14,15 +14,6 @@ $elegant-spacing: (
 );
 
 // Inspired by https://github.com/digitaledgeit/sass-spacing
-// @function get-elegant-multiplier($value) {
-//   @if ($value == 'none') {
-//     @return 0;
-//   } @else if ($value == 'half') {
-//     @return .5;
-//   } @else {
-//     @return $value;
-//   }
-// }
 
 $elegant-spacing-unit: map-get($elegant-spacing, 'unit');
 $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
@@ -35,6 +26,20 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
 @function elegant-valid-multiple($value) {
   // TODO: Handle fraction maps
   @return contains($elegant-spacing-multiples, $value);
+}
+
+@function elegant-multiple-modifier($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-modifier($value);
+  }
+  @return $value;
+}
+
+@function elegant-multiple-value($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-value($value);
+  }
+  @return $value;
 }
 
 @function elegant-multiple-is-fraction($value) {
@@ -53,16 +58,6 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
   }
 }
 
-// @each $fraction in $ezpz-fractions {
-// 			@each $key, $val in $fraction {
-// 				$modifier: format-modifier($key, $val);
-//
-// 				& > #{$ezpz-cell-namespace}#{$breakpoint}#{$modifier} {
-// 					@include create-cell($key / $val);
-// 				}
-// 			}
-// 		}
-
 @function elegant-mult($value) {
   // @if (elegant-valid-multiple($value)) {
     @return $value * $elegant-spacing-unit;
@@ -71,31 +66,46 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
     $elegant-spacing-multiples + '. You can configure this list in the $elegant-spacing config map.';
 }
 
-@mixin m($v-h: 1, $h: null) {
+@mixin elegant-v-h($rule, $v-h, $h) {
   @if ($h) {
-    margin: elegant-mult($v-h) elegant-mult($h);
+    #{$rule}: elegant-mult($v-h) elegant-mult($h);
   } @else {
-    margin: elegant-mult($v-h);
+    #{$rule}: elegant-mult($v-h);
   }
+}
+
+@mixin m($v-h: 1, $h: null) {
+  @include elegant-v-h('margin', $v-h, $h);
+}
+@mixin mt($mult: 1) {
+  margin-top: elegant-mult($mult);
 }
 
 @mixin elegant-generate-margin-classes {
   @each $mult in $elegant-spacing-multiples {
-    @if elegant-multiple-is-fraction($mult) {
-      $modifier: elegant-fraction-modifier($mult);
-      $value: elegant-fraction-value($mult);
-      @debug '$modifier ' + $modifier;
-      @debug '$value ' + $value;
-      .m-#{$modifier} {
-        @include m($value);
-      }
-    } @else {
-      $modifier: $mult;
-      $value: $mult;
-      .m-#{$modifier} {
-        @include m($value);
-      }
+    $modifier: elegant-multiple-modifier($mult);
+    $value: elegant-multiple-value($mult);
+    .u-m--#{$modifier} {
+      @include m($value);
     }
+    .u-mt--#{$modifier} {
+      @include mt($value);
+    }
+    // .u-mr--#{$modifier} {
+    //   @include mr($value);
+    // }
+    // .u-mb--#{$modifier} {
+    //   @include mb($value);
+    // }
+    // .u-ml--#{$modifier} {
+    //   @include ml($value);
+    // }
+    // .u-mv--#{$modifier} {
+    //   @include mv($value);
+    // }
+    // .u-mh--#{$modifier} {
+    //   @include mh($value);
+    // }
   }
 }
 
