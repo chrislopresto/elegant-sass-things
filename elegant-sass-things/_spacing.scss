@@ -1,0 +1,162 @@
+$elegant-spacing: (
+  unit: 1rem,
+  multiples: (0 (1:2) 1 2 3 4 5 6),
+  aliases: (
+    padding: 'p',
+    margin: 'm',
+    top: 't',
+    right: 'r',
+    bottom: 'b',
+    left: 'l',
+    vertical: 'v',
+    horizontal: 'h'
+  )
+);
+
+// Inspired by https://github.com/digitaledgeit/sass-spacing
+// @function get-elegant-multiplier($value) {
+//   @if ($value == 'none') {
+//     @return 0;
+//   } @else if ($value == 'half') {
+//     @return .5;
+//   } @else {
+//     @return $value;
+//   }
+// }
+
+$elegant-spacing-unit: map-get($elegant-spacing, 'unit');
+$elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
+
+@function contains($list, $item) {
+  @if index($list, $item) { @return true; }
+  @return false;
+}
+
+@function elegant-valid-multiple($value) {
+  // TODO: Handle fraction maps
+  @return contains($elegant-spacing-multiples, $value);
+}
+
+@function elegant-multiple-is-fraction($value) {
+  @return type-of($value) == 'map';
+}
+
+@function elegant-fraction-modifier($fraction-map) {
+  @each $k, $v in $fraction-map {
+    @return $k + '\\/' + $v;
+  }
+}
+
+@function elegant-fraction-value($fraction-map) {
+  @each $k, $v in $fraction-map {
+    @return $k / $v;
+  }
+}
+
+// @each $fraction in $ezpz-fractions {
+// 			@each $key, $val in $fraction {
+// 				$modifier: format-modifier($key, $val);
+//
+// 				& > #{$ezpz-cell-namespace}#{$breakpoint}#{$modifier} {
+// 					@include create-cell($key / $val);
+// 				}
+// 			}
+// 		}
+
+@function elegant-mult($value) {
+  // @if (elegant-valid-multiple($value)) {
+    @return $value * $elegant-spacing-unit;
+  // }
+  @warn 'elegant-sass-things error: ' + $value + ' is an invalid multiple. Valid multiples are: ' +
+    $elegant-spacing-multiples + '. You can configure this list in the $elegant-spacing config map.';
+}
+
+@mixin m($v-h: 1, $h: null) {
+  @if ($h) {
+    margin: elegant-mult($v-h) elegant-mult($h);
+  } @else {
+    margin: elegant-mult($v-h);
+  }
+}
+
+@mixin elegant-generate-margin-classes {
+  @each $mult in $elegant-spacing-multiples {
+    @if elegant-multiple-is-fraction($mult) {
+      $modifier: elegant-fraction-modifier($mult);
+      $value: elegant-fraction-value($mult);
+      @debug '$modifier ' + $modifier;
+      @debug '$value ' + $value;
+      .m-#{$modifier} {
+        @include m($value);
+      }
+    } @else {
+      $modifier: $mult;
+      $value: $mult;
+      .m-#{$modifier} {
+        @include m($value);
+      }
+    }
+  }
+}
+
+@include elegant-generate-margin-classes();
+
+// @mixin m-h($size: 1) {
+//     margin-left: map-get($spacing-sizes, $size);
+//     margin-right: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin m-v($size: 1) {
+//       margin-top: map-get($spacing-sizes, $size);
+//       margin-bottom: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin m-t($size: 1) {
+//     margin-top: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin m-r($size: 1) {
+//     margin-right: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin m-b($size: 1) {
+//     margin-bottom: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin m-l($size: 1) {
+//     margin-left: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p($size-all-or-v: 1, $size-h: null) {
+//     @if ($size-h) {
+//         padding: map-get($spacing-sizes, $size-all-or-v) map-get($spacing-sizes, $size-h);
+//     } @else {
+//         padding: map-get($spacing-sizes, $size-all-or-v);
+//     }
+// }
+//
+// @mixin p-h($size: 1) {
+//     padding-left: map-get($spacing-sizes, $size);
+//     padding-right: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p-v($size: 1) {
+//     padding-top: map-get($spacing-sizes, $size);
+//     padding-bottom: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p-t($size: 1) {
+//     padding-top: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p-r($size: 1) {
+//     padding-right: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p-b($size: 1) {
+//     padding-bottom: map-get($spacing-sizes, $size);
+// }
+//
+// @mixin p-l($size: 1) {
+//     padding-left: map-get($spacing-sizes, $size);
+// }

@@ -1,0 +1,29 @@
+{
+  "name": "elegant-sass-things",
+  "authors": [
+    "Chris LoPresto <chris@chrislopresto.com>"
+  ],
+  "description": "A set of elegant SASS utilities to do things",
+  "main": "elegant-sass-things.scss",
+  "keywords": [
+    "sass",
+    "scss",
+    "utility",
+    "utilities",
+    "grid",
+    "spacing",
+    "colors",
+    "zindex",
+    "breakpoints",
+    "responsive"
+  ],
+  "license": "MIT",
+  "homepage": "http://elegant-sass-things.chrislopresto.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
