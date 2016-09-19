@@ -66,7 +66,7 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
   @error 'elegant-sass-things error: ' + $value + ' is an invalid multiple. You can configure this list in the $elegant-spacing config map.';
 }
 
-@mixin elegant-v-h($rule, $v-h, $h) {
+@mixin elegant-v-h($rule, $v-h, $h: null) {
   @if ($h) {
     #{$rule}: elegant-multiple($v-h) elegant-multiple($h);
   } @else {

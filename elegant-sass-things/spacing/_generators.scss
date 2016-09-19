@@ -1,5 +1,3 @@
-@import '_abstracts';
-
 @mixin generate-elegant-spacing-margin-classes {
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
@@ -55,6 +53,3 @@
     }
   }
 }
-
-@include generate-elegant-spacing-margin-classes();
-@include generate-elegant-spacing-padding-classes();

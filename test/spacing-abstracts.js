@@ -2,7 +2,7 @@ import path from 'path';
 import assert from 'assert';
 import Sassaby from 'sassaby';
 
-describe('_spacing.scss', () => {
+describe('spacing/_abstracts.scss', () => {
   const file = path.resolve(__dirname, '../elegant-sass-things/spacing/_abstracts.scss');
 
   describe('contains', () => {
@@ -115,12 +115,72 @@ describe('_spacing.scss', () => {
       }
     });
 
-    it('should return value for a number)', () => {
+    it('should return value for a number', () => {
       sassaby.func('elegant-multiple').calledWithArgs('2').equals('20px');
     });
 
-    it('should return value for a fraction map)', () => {
+    it('should return value for a fraction map', () => {
       sassaby.func('elegant-multiple').calledWithArgs('.5').equals('5px');
+    });
+  });
+
+  describe('elegant-v-h', () => {
+    const sassaby = new Sassaby(file, {
+      variables: {
+        'elegant-spacing': `(
+          unit: 1rem,
+          multiples: (1 2)
+        )`
+      }
+    });
+
+    it('should accept shorthand for all sides', () => {
+      sassaby.includedMixin('elegant-v-h').calledWithArgs('margin', '2').declares('margin', '2rem');
+    });
+
+    it('should accept shorthand for vertical and horizontal', () => {
+      sassaby.includedMixin('elegant-v-h').calledWithArgs('margin', '2', '1').declares('margin', '2rem 1rem');
+    });
+  });
+
+  describe('margin|padding-top|right|bottom|left|vertical|horizontal', () => {
+    const sassaby = new Sassaby(file, {
+      variables: {
+        'elegant-spacing': `(
+          unit: 1rem,
+          multiples: (0 1 2)
+        )`
+      }
+    });
+
+    ['margin', 'padding'].forEach((rule) => {
+      it(`${rule} should apply default shorthand for all sides`, () => {
+        sassaby.includedMixin(rule).calledWithArgs().declares(rule, '1rem');
+      });
+
+      it(`${rule} should accept shorthand for all sides`, () => {
+        sassaby.includedMixin(rule).calledWithArgs('2').declares(rule, '2rem');
+      });
+
+      it(`${rule} should accept shorthand for vertical and horizontal`, () => {
+        sassaby.includedMixin(rule).calledWithArgs('2', '1').declares(rule, '2rem 1rem');
+      });
+
+      ['top', 'right', 'bottom', 'left'].forEach((direction) => {
+        it(`${rule}-${direction} should declare multiple`, () => {
+          sassaby.includedMixin(`${rule}-${direction}`).calledWithArgs('2').declares(`${rule}-${direction}`, '2rem');
+        });
+      });
+
+      it(`${rule}-vertical should declare multiples for top and bottom`, () => {
+        sassaby.includedMixin(`${rule}-vertical`).calledWithArgs('2').declares(`${rule}-top`, '2rem');
+        sassaby.includedMixin(`${rule}-vertical`).calledWithArgs('2').declares(`${rule}-bottom`, '2rem');
+      });
+
+      it(`${rule}-horizontal should declare multiples for left and right`, () => {
+        sassaby.includedMixin(`${rule}-horizontal`).calledWithArgs('2').declares(`${rule}-left`, '2rem');
+        sassaby.includedMixin(`${rule}-horizontal`).calledWithArgs('2').declares(`${rule}-right`, '2rem');
+      });
     });
   });
 
