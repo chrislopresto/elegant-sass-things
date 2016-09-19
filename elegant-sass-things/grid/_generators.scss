@@ -1,0 +1,84 @@
+@mixin generate-elegant-grid-column-classes($name: null) {
+  $name-token: '';
+  @if ($name) {
+    $name-token: '-' + $name;
+  }
+
+  .col#{$name-token} {
+    @include col-auto;
+  }
+
+  @for $i from 1 through $elegant-grid-columns {
+    .col#{$name-token}-#{$i} {
+      @include col-span($i);
+    }
+  }
+
+  @for $i from 0 through $elegant-grid-columns - 1 {
+    .col#{$name-token}-offset-#{$i} {
+      @include col-offset($i);
+    }
+  }
+
+  .justify-start#{$name-token} {
+    @include row-justify-start;
+  }
+
+  .justify-center#{$name-token} {
+    @include row-justify-center;
+  }
+
+  .justify-end#{$name-token} {
+    @include row-justify-end;
+  }
+
+  .align-top#{$name-token} {
+    @include row-align-top;
+  }
+
+  .align-center#{$name-token} {
+    @include row-align-center;
+  }
+
+  .align-bottom#{$name-token} {
+    @include row-align-bottom;
+  }
+
+  .justify-around#{$name-token} {
+    @include row-justify-around;
+  }
+
+  .justify-between#{$name-token} {
+    @include row-justify-between;
+  }
+
+  .col-first#{$name-token} {
+    @include col-first;
+  }
+
+  .col-last#{$name-token} {
+    @include col-last;
+  }
+}
+
+@mixin generate-elegant-grid-classes {
+  .row {
+    @include row;
+  }
+
+  .row.reverse {
+    @include row-reverse;
+  }
+
+  .col.reverse {
+    @include col-reverse;
+  }
+
+  @include generate-elegant-grid-column-classes;
+
+  @each $breakpoint-name, $breakpoint-media-query in $elegant-grid-breakpoints {
+    @media #{$breakpoint-media-query} {
+      @include generate-elegant-grid-column-classes($name: $breakpoint-name);
+    }
+  }
+}

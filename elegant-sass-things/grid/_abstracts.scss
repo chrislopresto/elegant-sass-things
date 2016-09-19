@@ -1,0 +1,108 @@
+$elegant-grid-defaults: (
+  breakpoints: (
+    sm: 'only screen and (min-width: 400px)',
+    md: 'only screen and (min-width: 700px)',
+    lg: 'only screen and (min-width: 1200px)',
+  ),
+  gutter: 1rem,
+  columns: 12
+);
+
+$elegant-grid: () !default;
+$elegant-grid: map-merge($elegant-grid-defaults, $elegant-grid);
+
+$elegant-grid-gutter: map-get($elegant-grid, 'gutter');
+$elegant-grid-columns: map-get($elegant-grid, 'columns');
+$elegant-grid-breakpoints: map-get($elegant-grid, 'breakpoints');
+$elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
+
+@mixin row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: $elegant-grid-gutter * -.5;
+  margin-left: $elegant-grid-gutter * -.5;
+}
+
+@mixin row-reverse {
+  flex-direction: row-reverse;
+}
+
+@mixin col-reverse {
+  flex-direction: column-reverse;
+}
+
+@mixin col {
+  box-sizing: border-box;
+  // flex: 0 0 auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-right: $elegant-grid-gutter * .5;
+  padding-left: $elegant-grid-gutter * .5;
+}
+
+@mixin col-auto {
+  @include col;
+
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+@mixin col-span($i) {
+  @include col;
+
+  flex-basis: 100% / $elegant-grid-columns * $i;
+  max-width: 100% / $elegant-grid-columns * $i;
+}
+
+@mixin col-offset($i) {
+  @include col;
+
+  margin-left: 100% / $elegant-grid-columns * $i;
+}
+
+@mixin row-justify-start {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+@mixin row-justify-center {
+  justify-content: center;
+  text-align: center;
+}
+
+@mixin row-justify-end {
+  justify-content: flex-end;
+  text-align: end;
+}
+
+@mixin row-align-top {
+  align-items: flex-start;
+}
+
+@mixin row-align-center {
+  align-items: center;
+}
+
+@mixin row-align-bottom {
+  align-items: flex-end;
+}
+
+@mixin row-justify-around {
+  justify-content: space-around;
+}
+
+@mixin row-justify-between {
+  justify-content: space-between;
+}
+
+@mixin col-first {
+  order: -1;
+}
+
+@mixin col-last {
+  order: 1;
+}
