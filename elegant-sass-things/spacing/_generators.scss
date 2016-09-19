@@ -1,69 +1,99 @@
-@mixin generate-elegant-spacing-margin-classes {
+@mixin generate-elegant-spacing-margin-column-classes($name: null) {
+  $name-token: '';
+  @if ($name) {
+    $name-token: '-' + $name;
+  }
+
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
     $value: elegant-multiple-value($mult);
 
-    .u-margin--#{$modifier} {
+    .m#{$name-token}-#{$modifier} {
       @include margin($value);
     }
 
-    .u-marginTop--#{$modifier} {
+    .mt#{$name-token}-#{$modifier} {
       @include margin-top($value);
     }
 
-    .u-marginRight--#{$modifier} {
+    .mr#{$name-token}-#{$modifier} {
       @include margin-right($value);
     }
 
-    .u-marginBottom--#{$modifier} {
+    .mb#{$name-token}-#{$modifier} {
       @include margin-bottom($value);
     }
 
-    .u-marginLeft--#{$modifier} {
+    .ml#{$name-token}-#{$modifier} {
       @include margin-left($value);
     }
 
-    .u-marginVertical--#{$modifier} {
+    .mv#{$name-token}-#{$modifier} {
       @include margin-vertical($value);
     }
 
-    .u-marginHorizontal--#{$modifier} {
+    .mh#{$name-token}-#{$modifier} {
       @include margin-horizontal($value);
     }
   }
 }
 
-@mixin generate-elegant-spacing-padding-classes {
+@mixin generate-elegant-spacing-padding-column-classes($name: null) {
+  $name-token: '';
+  @if ($name) {
+    $name-token: '-' + $name;
+  }
+
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
     $value: elegant-multiple-value($mult);
 
-    .u-padding--#{$modifier} {
+    .p#{$name-token}-#{$modifier} {
       @include padding($value);
     }
 
-    .u-paddingTop--#{$modifier} {
+    .pt#{$name-token}-#{$modifier} {
       @include padding-top($value);
     }
 
-    .u-paddingRight--#{$modifier} {
+    .pr#{$name-token}-#{$modifier} {
       @include padding-right($value);
     }
 
-    .u-paddingBottom--#{$modifier} {
+    .pb#{$name-token}-#{$modifier} {
       @include padding-bottom($value);
     }
 
-    .u-paddingLeft--#{$modifier} {
+    .pl#{$name-token}-#{$modifier} {
       @include padding-left($value);
     }
 
-    .u-paddingVertical--#{$modifier} {
+    .pv#{$name-token}-#{$modifier} {
       @include padding-vertical($value);
     }
 
-    .u-paddingHorizontal--#{$modifier} {
+    .ph#{$name-token}-#{$modifier} {
       @include padding-horizontal($value);
+    }
+  }
+}
+
+@mixin generate-elegant-spacing-margin-classes {
+  @include generate-elegant-spacing-margin-column-classes;
+
+  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
+    @media #{$breakpoint-media-query} {
+      @include generate-elegant-spacing-margin-column-classes($name: $breakpoint-name);
+    }
+  }
+}
+
+@mixin generate-elegant-spacing-padding-classes {
+  @include generate-elegant-spacing-padding-column-classes;
+
+  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
+    @media #{$breakpoint-media-query} {
+      @include generate-elegant-spacing-padding-column-classes($name: $breakpoint-name);
     }
   }
 }

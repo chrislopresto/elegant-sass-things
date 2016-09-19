@@ -1,6 +1,11 @@
 $elegant-spacing-defaults: (
   unit: 1rem,
-  multiples: (0 (1: 2) 1 2 3 4 5 6)
+  multiples: (0 (1: 2) 1 2 3 4 5 6),
+  breakpoints: (
+    sm: 'only screen and (min-width: 400px)',
+    md: 'only screen and (min-width: 700px)',
+    lg: 'only screen and (min-width: 1200px)',
+  ),
 );
 
 $elegant-spacing: () !default;
@@ -8,6 +13,7 @@ $elegant-spacing: map-merge($elegant-spacing-defaults, $elegant-spacing);
 
 $elegant-spacing-unit: map-get($elegant-spacing, 'unit');
 $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
+$elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 
 @function contains($list, $item) {
   @if index($list, $item) { @return true; }
