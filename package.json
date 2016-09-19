@@ -33,6 +33,7 @@
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "mocha": "^3.0.2",
-    "sassaby": "chrislopresto/sassaby#function-results-amidst-css-output"
+    "sass-lint": "^1.9.1",
+    "sassaby": "^2.1.1"
   }
 }

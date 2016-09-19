@@ -1,0 +1,35 @@
+files:
+  include:
+    - elegant-sass-things.scss
+    - elegant-sass-things/**/*.scss
+  ignore:
+    - node_modules/**/*
+rules:
+  class-name-format:
+    - 0
+      # convention: ^(?:ud|is|has)\-[a-z][a-zA-Z0-9]*(?:\-\-[a-z0-9][a-zA-Z0-9]*)?$|^(?!u|is|has)[a-zA-Z][a-zA-Z0-9]*(?:\-[a-z][a-zA-Z0-9]*)?(?:\-\-[a-z][a-zA-Z0-9]*)?$
+      # convention-explanation: 'SUIT CSS naming convention'
+  extends-before-mixins: 2
+  extends-before-declarations: 2
+  placeholder-in-extend: 2
+  mixins-before-declarations:
+    - 2
+    -
+      exclude:
+        - breakpoint
+        - mq
+  no-warn: 1
+  no-debug: 1
+  no-ids: 2
+  no-important: 2
+  indentation:
+    - 2
+    -
+      size: 2
+  property-sort-order:
+    - 1
+    -
+      order:
+        - display
+        - margin
+      ignore-custom-properties: true

@@ -2,24 +2,31 @@
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
     $value: elegant-multiple-value($mult);
+
     .u-margin--#{$modifier} {
       @include margin($value);
     }
+
     .u-marginTop--#{$modifier} {
       @include margin-top($value);
     }
+
     .u-marginRight--#{$modifier} {
       @include margin-right($value);
     }
+
     .u-marginBottom--#{$modifier} {
       @include margin-bottom($value);
     }
+
     .u-marginLeft--#{$modifier} {
       @include margin-left($value);
     }
+
     .u-marginVertical--#{$modifier} {
       @include margin-vertical($value);
     }
+
     .u-marginHorizontal--#{$modifier} {
       @include margin-horizontal($value);
     }
@@ -30,24 +37,31 @@
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
     $value: elegant-multiple-value($mult);
+
     .u-padding--#{$modifier} {
       @include padding($value);
     }
+
     .u-paddingTop--#{$modifier} {
       @include padding-top($value);
     }
+
     .u-paddingRight--#{$modifier} {
       @include padding-right($value);
     }
+
     .u-paddingBottom--#{$modifier} {
       @include padding-bottom($value);
     }
+
     .u-paddingLeft--#{$modifier} {
       @include padding-left($value);
     }
+
     .u-paddingVertical--#{$modifier} {
       @include padding-vertical($value);
     }
+
     .u-paddingHorizontal--#{$modifier} {
       @include padding-horizontal($value);
     }
