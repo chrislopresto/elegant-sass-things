@@ -4,18 +4,18 @@
     $name-token: '-' + $name;
   }
 
-  .col#{$name-token} {
+  .#{$elegant-grid-selector-prefix}col#{$name-token} {
     @include col-auto;
   }
 
   @for $i from 1 through $elegant-grid-columns {
-    .col#{$name-token}-#{$i} {
+    .#{$elegant-grid-selector-prefix}col#{$name-token}-#{$i} {
       @include col-span($i);
     }
   }
 
   @for $i from 0 through $elegant-grid-columns - 1 {
-    .col#{$name-token}-offset-#{$i} {
+    .#{$elegant-grid-selector-prefix}col#{$name-token}-offset-#{$i} {
       @include col-offset($i);
     }
   }
@@ -62,7 +62,7 @@
 }
 
 @mixin generate-elegant-grid-classes {
-  .row {
+  .#{$elegant-grid-selector-prefix}row {
     @include row;
 
     &.reverse {

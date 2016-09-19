@@ -5,7 +5,8 @@ $elegant-grid-defaults: (
     lg: 'only screen and (min-width: 1200px)',
   ),
   gutter: 1rem,
-  columns: 12
+  columns: 12,
+  selector-prefix: 'g-'
 );
 
 $elegant-grid: () !default;
@@ -14,6 +15,7 @@ $elegant-grid: map-merge($elegant-grid-defaults, $elegant-grid);
 $elegant-grid-gutter: map-get($elegant-grid, 'gutter');
 $elegant-grid-columns: map-get($elegant-grid, 'columns');
 $elegant-grid-breakpoints: map-get($elegant-grid, 'breakpoints');
+$elegant-grid-selector-prefix: map-get($elegant-grid, 'selector-prefix');
 $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
 
 @mixin row {
