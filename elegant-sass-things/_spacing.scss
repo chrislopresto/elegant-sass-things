@@ -1,4 +1,4 @@
 @import 'spacing/abstracts';
 @import 'spacing/generators';
 @include generate-elegant-spacing-margin-classes;
-@include generate-elegant-spacing-padding-classes();
+@include generate-elegant-spacing-padding-classes;
