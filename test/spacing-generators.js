@@ -19,17 +19,19 @@ describe('spacing/_generators.scss', () => {
     });
 
     ['margin', 'padding'].forEach((rule) => {
+      let ruleAbbreviation = rule.charAt(0);
+
       [1, 2].forEach((multiple) => {
         it(`should generate ${rule} selector for multiple ${multiple}`, () => {
-          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.u-${rule}--${multiple}`);
+          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.${ruleAbbreviation}-${multiple}`);
           sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}(${multiple})`);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
-          it(`should generate ${rule} ${direction} selector for multiple $multiple`, () => {
-            // Capitalize direction to build utilityName... e.g. marginTop
-            let utilityName = rule + direction.charAt(0).toUpperCase() + direction.slice(1);
-            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.u-${utilityName}--${multiple}`);
+          let directionAbbreviation = direction.charAt(0);
+
+          it(`should generate ${rule} ${direction} selector for multiple ${multiple}`, () => {
+            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.${ruleAbbreviation}${directionAbbreviation}-${multiple}`);
             sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}-${direction}(${multiple})`);
           })
         });
