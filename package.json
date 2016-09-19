@@ -4,7 +4,8 @@
   "description": "A set of elegant SASS utilities to do things",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-core/register",
+    "test-watch": "mocha --compilers js:babel-core/register -w"
   },
   "repository": {
     "type": "git",
