@@ -33,3 +33,5 @@ rules:
         - display
         - margin
       ignore-custom-properties: true
+  empty-args: 2
+  
