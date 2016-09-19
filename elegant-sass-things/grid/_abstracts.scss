@@ -30,13 +30,8 @@ $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
   flex-direction: row-reverse;
 }
 
-@mixin col-reverse {
-  flex-direction: column-reverse;
-}
-
 @mixin col {
   box-sizing: border-box;
-  // flex: 0 0 auto;
   flex-grow: 0;
   flex-shrink: 0;
   padding-right: $elegant-grid-gutter * .5;

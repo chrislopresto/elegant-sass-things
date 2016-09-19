@@ -64,14 +64,10 @@
 @mixin generate-elegant-grid-classes {
   .row {
     @include row;
-  }
 
-  .row.reverse {
-    @include row-reverse;
-  }
-
-  .col.reverse {
-    @include col-reverse;
+    &.reverse {
+      @include row-reverse;
+    }
   }
 
   @include generate-elegant-grid-column-classes;
