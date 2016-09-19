@@ -1,19 +1,10 @@
-$elegant-spacing: (
+$elegant-spacing-defaults: (
   unit: 1rem,
-  multiples: (0 (1:2) 1 2 3 4 5 6),
-  aliases: (
-    padding: 'p',
-    margin: 'm',
-    top: 't',
-    right: 'r',
-    bottom: 'b',
-    left: 'l',
-    vertical: 'v',
-    horizontal: 'h'
-  )
+  multiples: (0 (1:2) 1 2 3 4 5 6)
 );
 
-// Inspired by https://github.com/digitaledgeit/sass-spacing
+$elegant-spacing: () !default;
+$elegant-spacing: map-merge($elegant-spacing-defaults, $elegant-spacing);
 
 $elegant-spacing-unit: map-get($elegant-spacing, 'unit');
 $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
@@ -24,22 +15,7 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
 }
 
 @function elegant-valid-multiple($value) {
-  // TODO: Handle fraction maps
   @return contains($elegant-spacing-multiples, $value);
-}
-
-@function elegant-multiple-modifier($value) {
-  @if elegant-multiple-is-fraction($value) {
-    @return elegant-fraction-modifier($value);
-  }
-  @return $value;
-}
-
-@function elegant-multiple-value($value) {
-  @if elegant-multiple-is-fraction($value) {
-    @return elegant-fraction-value($value);
-  }
-  @return $value;
 }
 
 @function elegant-multiple-is-fraction($value) {
@@ -58,7 +34,21 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
   }
 }
 
-@function elegant-mult($value) {
+@function elegant-multiple-modifier($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-modifier($value);
+  }
+  @return $value;
+}
+
+@function elegant-multiple-value($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-value($value);
+  }
+  @return $value;
+}
+
+@function elegant-multiple($value) {
   // @if (elegant-valid-multiple($value)) {
     @return $value * $elegant-spacing-unit;
   // }
@@ -68,105 +58,115 @@ $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
 
 @mixin elegant-v-h($rule, $v-h, $h) {
   @if ($h) {
-    #{$rule}: elegant-mult($v-h) elegant-mult($h);
+    #{$rule}: elegant-multiple($v-h) elegant-multiple($h);
   } @else {
-    #{$rule}: elegant-mult($v-h);
+    #{$rule}: elegant-multiple($v-h);
   }
 }
 
-@mixin m($v-h: 1, $h: null) {
+@mixin margin($v-h: 1, $h: null) {
   @include elegant-v-h('margin', $v-h, $h);
 }
-@mixin mt($mult: 1) {
-  margin-top: elegant-mult($mult);
+@mixin margin-top($mult: 1) {
+  margin-top: elegant-multiple($mult);
+}
+@mixin margin-right($mult: 1) {
+  margin-right: elegant-multiple($mult);
+}
+@mixin margin-bottom($mult: 1) {
+  margin-bottom: elegant-multiple($mult);
+}
+@mixin margin-left($mult: 1) {
+  margin-left: elegant-multiple($mult);
+}
+@mixin margin-vertical($mult: 1) {
+  margin-top: elegant-multiple($mult);
+  margin-bottom: elegant-multiple($mult);
+}
+@mixin margin-horizontal($mult: 1) {
+  margin-left: elegant-multiple($mult);
+  margin-right: elegant-multiple($mult);
 }
 
 @mixin elegant-generate-margin-classes {
   @each $mult in $elegant-spacing-multiples {
     $modifier: elegant-multiple-modifier($mult);
     $value: elegant-multiple-value($mult);
-    .u-m--#{$modifier} {
-      @include m($value);
+    .u-margin--#{$modifier} {
+      @include margin($value);
     }
-    .u-mt--#{$modifier} {
-      @include mt($value);
+    .u-marginTop--#{$modifier} {
+      @include margin-top($value);
     }
-    // .u-mr--#{$modifier} {
-    //   @include mr($value);
-    // }
-    // .u-mb--#{$modifier} {
-    //   @include mb($value);
-    // }
-    // .u-ml--#{$modifier} {
-    //   @include ml($value);
-    // }
-    // .u-mv--#{$modifier} {
-    //   @include mv($value);
-    // }
-    // .u-mh--#{$modifier} {
-    //   @include mh($value);
-    // }
+    .u-marginRight--#{$modifier} {
+      @include margin-right($value);
+    }
+    .u-marginBottom--#{$modifier} {
+      @include margin-bottom($value);
+    }
+    .u-marginLeft--#{$modifier} {
+      @include margin-left($value);
+    }
+    .u-marginVertical--#{$modifier} {
+      @include margin-vertical($value);
+    }
+    .u-marginHorizontal--#{$modifier} {
+      @include margin-horizontal($value);
+    }
+  }
+}
+
+@mixin padding($v-h: 1, $h: null) {
+  @include elegant-v-h('padding', $v-h, $h);
+}
+@mixin padding-top($mult: 1) {
+  padding-top: elegant-multiple($mult);
+}
+@mixin padding-right($mult: 1) {
+  padding-right: elegant-multiple($mult);
+}
+@mixin padding-bottom($mult: 1) {
+  padding-bottom: elegant-multiple($mult);
+}
+@mixin padding-left($mult: 1) {
+  padding-left: elegant-multiple($mult);
+}
+@mixin padding-vertical($mult: 1) {
+  padding-top: elegant-multiple($mult);
+  padding-bottom: elegant-multiple($mult);
+}
+@mixin padding-horizontal($mult: 1) {
+  padding-left: elegant-multiple($mult);
+  padding-right: elegant-multiple($mult);
+}
+
+@mixin elegant-generate-padding-classes {
+  @each $mult in $elegant-spacing-multiples {
+    $modifier: elegant-multiple-modifier($mult);
+    $value: elegant-multiple-value($mult);
+    .u-padding--#{$modifier} {
+      @include padding($value);
+    }
+    .u-paddingTop--#{$modifier} {
+      @include padding-top($value);
+    }
+    .u-paddingRight--#{$modifier} {
+      @include padding-right($value);
+    }
+    .u-paddingBottom--#{$modifier} {
+      @include padding-bottom($value);
+    }
+    .u-paddingLeft--#{$modifier} {
+      @include padding-left($value);
+    }
+    .u-paddingVertical--#{$modifier} {
+      @include padding-vertical($value);
+    }
+    .u-paddingHorizontal--#{$modifier} {
+      @include padding-horizontal($value);
+    }
   }
 }
 
 @include elegant-generate-margin-classes();
-
-// @mixin m-h($size: 1) {
-//     margin-left: map-get($spacing-sizes, $size);
-//     margin-right: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin m-v($size: 1) {
-//       margin-top: map-get($spacing-sizes, $size);
-//       margin-bottom: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin m-t($size: 1) {
-//     margin-top: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin m-r($size: 1) {
-//     margin-right: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin m-b($size: 1) {
-//     margin-bottom: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin m-l($size: 1) {
-//     margin-left: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p($size-all-or-v: 1, $size-h: null) {
-//     @if ($size-h) {
-//         padding: map-get($spacing-sizes, $size-all-or-v) map-get($spacing-sizes, $size-h);
-//     } @else {
-//         padding: map-get($spacing-sizes, $size-all-or-v);
-//     }
-// }
-//
-// @mixin p-h($size: 1) {
-//     padding-left: map-get($spacing-sizes, $size);
-//     padding-right: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p-v($size: 1) {
-//     padding-top: map-get($spacing-sizes, $size);
-//     padding-bottom: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p-t($size: 1) {
-//     padding-top: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p-r($size: 1) {
-//     padding-right: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p-b($size: 1) {
-//     padding-bottom: map-get($spacing-sizes, $size);
-// }
-//
-// @mixin p-l($size: 1) {
-//     padding-left: map-get($spacing-sizes, $size);
-// }
+@include elegant-generate-padding-classes();
