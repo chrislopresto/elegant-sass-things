@@ -1,0 +1,123 @@
+$elegant-spacing-defaults: (
+  unit: 1rem,
+  multiples: (0 (1:2) 1 2 3 4 5 6)
+);
+
+$elegant-spacing: () !default;
+$elegant-spacing: map-merge($elegant-spacing-defaults, $elegant-spacing);
+
+$elegant-spacing-unit: map-get($elegant-spacing, 'unit');
+$elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
+
+@function contains($list, $item) {
+  @if index($list, $item) { @return true; }
+  @return false;
+}
+
+@function elegant-valid-multiple($value) {
+  $valid-integer: contains($elegant-spacing-multiples, $value);
+  @if $valid-integer {
+    @return true;
+  }
+  @each $mult in $elegant-spacing-multiples {
+    @if elegant-multiple-is-fraction($mult) {
+      @if (elegant-fraction-value($mult) == $value) {
+        @return true;
+      }
+    }
+  }
+  @return false;
+}
+
+@function elegant-multiple-is-fraction($value) {
+  @return type-of($value) == 'map';
+}
+
+@function elegant-fraction-modifier($fraction-map) {
+  @each $k, $v in $fraction-map {
+    @return $k + '\\/' + $v;
+  }
+}
+
+@function elegant-fraction-value($fraction-map) {
+  @each $k, $v in $fraction-map {
+    @return $k / $v;
+  }
+}
+
+@function elegant-multiple-modifier($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-modifier($value);
+  }
+  @return $value;
+}
+
+@function elegant-multiple-value($value) {
+  @if elegant-multiple-is-fraction($value) {
+    @return elegant-fraction-value($value);
+  }
+  @return $value;
+}
+
+@function elegant-multiple($value) {
+  @if (elegant-valid-multiple($value)) {
+    @return $value * $elegant-spacing-unit;
+  }
+  @error 'elegant-sass-things error: ' + $value + ' is an invalid multiple. You can configure this list in the $elegant-spacing config map.';
+}
+
+@mixin elegant-v-h($rule, $v-h, $h) {
+  @if ($h) {
+    #{$rule}: elegant-multiple($v-h) elegant-multiple($h);
+  } @else {
+    #{$rule}: elegant-multiple($v-h);
+  }
+}
+
+@mixin margin($v-h: 1, $h: null) {
+  @include elegant-v-h('margin', $v-h, $h);
+}
+@mixin margin-top($mult: 1) {
+  margin-top: elegant-multiple($mult);
+}
+@mixin margin-right($mult: 1) {
+  margin-right: elegant-multiple($mult);
+}
+@mixin margin-bottom($mult: 1) {
+  margin-bottom: elegant-multiple($mult);
+}
+@mixin margin-left($mult: 1) {
+  margin-left: elegant-multiple($mult);
+}
+@mixin margin-vertical($mult: 1) {
+  margin-top: elegant-multiple($mult);
+  margin-bottom: elegant-multiple($mult);
+}
+@mixin margin-horizontal($mult: 1) {
+  margin-left: elegant-multiple($mult);
+  margin-right: elegant-multiple($mult);
+}
+
+@mixin padding($v-h: 1, $h: null) {
+  @include elegant-v-h('padding', $v-h, $h);
+}
+@mixin padding-top($mult: 1) {
+  padding-top: elegant-multiple($mult);
+}
+@mixin padding-right($mult: 1) {
+  padding-right: elegant-multiple($mult);
+}
+@mixin padding-bottom($mult: 1) {
+  padding-bottom: elegant-multiple($mult);
+}
+@mixin padding-left($mult: 1) {
+  padding-left: elegant-multiple($mult);
+}
+@mixin padding-vertical($mult: 1) {
+  padding-top: elegant-multiple($mult);
+  padding-bottom: elegant-multiple($mult);
+}
+@mixin padding-horizontal($mult: 1) {
+  padding-left: elegant-multiple($mult);
+  padding-right: elegant-multiple($mult);
+}

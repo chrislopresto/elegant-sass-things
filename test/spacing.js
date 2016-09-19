@@ -3,7 +3,7 @@ import assert from 'assert';
 import Sassaby from 'sassaby';
 
 describe('_spacing.scss', () => {
-  const file = path.resolve(__dirname, '../elegant-sass-things/_spacing.scss');
+  const file = path.resolve(__dirname, '../elegant-sass-things/spacing/_abstracts.scss');
 
   describe('contains', () => {
     const sassaby = new Sassaby(file);
@@ -36,12 +36,20 @@ describe('_spacing.scss', () => {
       sassaby.func('elegant-valid-multiple').calledWithArgs('(1:2)').isTrue();
     });
 
+    it('should return true for fraction value in config', () => {
+      sassaby.func('elegant-valid-multiple').calledWithArgs('.5').isTrue();
+    });
+
     it('should return false for number not in config', () => {
       sassaby.func('elegant-valid-multiple').calledWithArgs(4).isFalse();
     });
 
     it('should return false for fraction map not in config', () => {
-      sassaby.func('elegant-valid-multiple').calledWithArgs('(1:3)').isFalse();
+      sassaby.func('elegant-valid-multiple').calledWithArgs('(1:4)').isFalse();
+    });
+
+    it('should return false for fraction value not in config', () => {
+      sassaby.func('elegant-valid-multiple').calledWithArgs('.25').isFalse();
     });
   });
 
