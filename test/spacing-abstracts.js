@@ -9,13 +9,13 @@ describe('spacing/_abstracts.scss', () => {
     const sassaby = new Sassaby(file);
 
     it('should return true when item is in list', () => {
-      sassaby.func('contains').calledWithArgs('(0 (1:2) 1 2 3 4 5 6)', '1').isTrue();
-      sassaby.func('contains').calledWithArgs('(0 (1:2) 1 2 3 4 5 6)', '(1:2)').isTrue();
+      sassaby.func('contains').calledWithArgs('(0 (1,2) 1 2 3 4 5 6)', '1').isTrue();
+      sassaby.func('contains').calledWithArgs('(0 (1,2) 1 2 3 4 5 6)', '(1,2)').isTrue();
     });
 
     it('should return false when item is not in list', () => {
-      sassaby.func('contains').calledWithArgs('(0 (1:2) 1 2 3 4 5 6)', '10').isFalse();
-      sassaby.func('contains').calledWithArgs('(0 (1:2) 1 2 3 4 5 6)', '(1:3)').isFalse();
+      sassaby.func('contains').calledWithArgs('(0 (1,2) 1 2 3 4 5 6)', '10').isFalse();
+      sassaby.func('contains').calledWithArgs('(0 (1,2) 1 2 3 4 5 6)', '(1,3)').isFalse();
     });
   });
 
@@ -23,7 +23,7 @@ describe('spacing/_abstracts.scss', () => {
     const sassaby = new Sassaby(file, {
       variables: {
         'elegant-spacing': `(
-          multiples: ((1:2) 1 2 3)
+          multiples: ((1,2) 1 2 3)
         )`
       }
     });
@@ -32,8 +32,8 @@ describe('spacing/_abstracts.scss', () => {
       sassaby.func('elegant-valid-multiple').calledWithArgs(1).isTrue();
     });
 
-    it('should return true for fraction map in config', () => {
-      sassaby.func('elegant-valid-multiple').calledWithArgs('(1:2)').isTrue();
+    it('should return true for fraction in config', () => {
+      sassaby.func('elegant-valid-multiple').calledWithArgs('(1,2)').isTrue();
     });
 
     it('should return true for fraction value in config', () => {
@@ -44,8 +44,8 @@ describe('spacing/_abstracts.scss', () => {
       sassaby.func('elegant-valid-multiple').calledWithArgs(4).isFalse();
     });
 
-    it('should return false for fraction map not in config', () => {
-      sassaby.func('elegant-valid-multiple').calledWithArgs('(1:4)').isFalse();
+    it('should return false for fraction not in config', () => {
+      sassaby.func('elegant-valid-multiple').calledWithArgs('(1,4)').isFalse();
     });
 
     it('should return false for fraction value not in config', () => {
@@ -56,12 +56,28 @@ describe('spacing/_abstracts.scss', () => {
   describe('elegant-multiple-is-fraction', () => {
     const sassaby = new Sassaby(file);
 
-    it('should return true when item is a map)', () => {
-      sassaby.func('elegant-multiple-is-fraction').calledWithArgs('(1:2)').isTrue();
+    it('should return true when item is a list)', () => {
+      sassaby.func('elegant-multiple-is-fraction').calledWithArgs('(1,2)').isTrue();
     });
 
-    it('should return false when item is not a map', () => {
+    it('should return false when item is not a list', () => {
       sassaby.func('elegant-multiple-is-fraction').calledWithArgs('1').isFalse();
+    });
+  });
+
+  describe('elegant-numerator', () => {
+    const sassaby = new Sassaby(file);
+
+    it('should return first item in list)', () => {
+      sassaby.func('elegant-numerator').calledWithArgs('(1,2)').equals('1');
+    });
+  });
+
+  describe('elegant-denominator', () => {
+    const sassaby = new Sassaby(file);
+
+    it('should return first item in list)', () => {
+      sassaby.func('elegant-denominator').calledWithArgs('(1,2)').equals('2');
     });
   });
 
@@ -69,7 +85,7 @@ describe('spacing/_abstracts.scss', () => {
     const sassaby = new Sassaby(file);
 
     it('should return modifier with escaped slash)', () => {
-      sassaby.func('elegant-fraction-modifier').calledWithArgs('(1:2)').equals('"1\\\\/2"');
+      sassaby.func('elegant-fraction-modifier').calledWithArgs('(1,2)').equals('"1\\\\/2"');
     });
   });
 
@@ -77,7 +93,7 @@ describe('spacing/_abstracts.scss', () => {
     const sassaby = new Sassaby(file);
 
     it('should return numeric value)', () => {
-      sassaby.func('elegant-fraction-value').calledWithArgs('(1:2)').equals('.5');
+      sassaby.func('elegant-fraction-value').calledWithArgs('(1,2)').equals('.5');
     });
   });
 
@@ -88,8 +104,8 @@ describe('spacing/_abstracts.scss', () => {
       sassaby.func('elegant-multiple-modifier').calledWithArgs('1').equals('1');
     });
 
-    it('should return modifier for a fraction map)', () => {
-      sassaby.func('elegant-multiple-modifier').calledWithArgs('(1:2)').equals('"1\\\\/2"');
+    it('should return modifier for a fraction)', () => {
+      sassaby.func('elegant-multiple-modifier').calledWithArgs('(1,2)').equals('"1\\\\/2"');
     });
   });
 
@@ -100,8 +116,8 @@ describe('spacing/_abstracts.scss', () => {
       sassaby.func('elegant-multiple-value').calledWithArgs('1').equals('1');
     });
 
-    it('should return value for a fraction map)', () => {
-      sassaby.func('elegant-multiple-value').calledWithArgs('(1:2)').equals('.5');
+    it('should return value for a fraction)', () => {
+      sassaby.func('elegant-multiple-value').calledWithArgs('(1,2)').equals('.5');
     });
   });
 
@@ -110,7 +126,7 @@ describe('spacing/_abstracts.scss', () => {
       variables: {
         'elegant-spacing': `(
           unit: 10px,
-          multiples: ((1:2) 1 2 3)
+          multiples: ((1,2) 1 2 3)
         )`
       }
     });
@@ -119,7 +135,7 @@ describe('spacing/_abstracts.scss', () => {
       sassaby.func('elegant-multiple').calledWithArgs('2').equals('20px');
     });
 
-    it('should return value for a fraction map', () => {
+    it('should return value for a fraction', () => {
       sassaby.func('elegant-multiple').calledWithArgs('.5').equals('5px');
     });
   });

@@ -1,6 +1,6 @@
 $elegant-spacing-defaults: (
   unit: 1rem,
-  multiples: (0 (1: 2) 1 2 3 4 5 6),
+  multiples: (0 (1, 2) 1 2 3 4 5 6),
   breakpoints: (
     sm: 'only screen and (min-width: 400px)',
     md: 'only screen and (min-width: 700px)',
@@ -36,19 +36,23 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 }
 
 @function elegant-multiple-is-fraction($value) {
-  @return type-of($value) == 'map';
+  @return type-of($value) == 'list';
 }
 
-@function elegant-fraction-modifier($fraction-map) {
-  @each $k, $v in $fraction-map {
-    @return $k + '\\/' + $v;
-  }
+@function elegant-numerator($fraction) {
+  @return nth($fraction, 1);
 }
 
-@function elegant-fraction-value($fraction-map) {
-  @each $k, $v in $fraction-map {
-    @return $k / $v;
-  }
+@function elegant-denominator($fraction) {
+  @return nth($fraction, length($fraction));
+}
+
+@function elegant-fraction-modifier($fraction) {
+  @return elegant-numerator($fraction) + '\\/' + elegant-denominator($fraction);
+}
+
+@function elegant-fraction-value($fraction) {
+  @return elegant-numerator($fraction) / elegant-denominator($fraction);
 }
 
 @function elegant-multiple-modifier($value) {
