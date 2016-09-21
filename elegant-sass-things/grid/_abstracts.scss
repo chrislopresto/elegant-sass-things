@@ -36,8 +36,8 @@ $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
   box-sizing: border-box;
   flex-grow: 0;
   flex-shrink: 0;
-  padding-right: $elegant-grid-gutter * .5;
-  padding-left: $elegant-grid-gutter * .5;
+  // padding-right: $elegant-grid-gutter * .5;
+  // padding-left: $elegant-grid-gutter * .5;
 }
 
 @mixin col-auto {
