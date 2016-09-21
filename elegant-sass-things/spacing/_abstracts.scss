@@ -18,7 +18,7 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 @function elegant-spacers() {
   $spacers: ();
   @each $mult in $elegant-spacing-multiples {
-    $k: elegant-multiple-modifier($mult) + "";
+    $k: elegant-multiple-modifier($mult) + '';
     $v: elegant-multiple(elegant-multiple-value($mult));
     $spacers: map-merge($spacers, ($k: $v));
   }
@@ -46,7 +46,7 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 }
 
 @function elegant-spacer-get($key) {
-  @return map-get($elegant-spacers, $key + "");
+  @return map-get($elegant-spacers, $key + '');
 }
 
 @function elegant-multiple-is-fraction($value) {
