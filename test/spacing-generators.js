@@ -10,7 +10,7 @@ describe('spacing/_generators.scss', () => {
       variables: {
         'elegant-spacing': `(
           unit: 1rem,
-          multiples: (1 2)
+          multiples: ((1, 2) 1 2)
         )`
       },
       dependencies: [
@@ -21,17 +21,22 @@ describe('spacing/_generators.scss', () => {
     ['margin', 'padding'].forEach((rule) => {
       let ruleAbbreviation = rule.charAt(0);
 
-      [1, 2].forEach((multiple) => {
+      ['(1,2)', '1', '2'].forEach((multiple) => {
         it(`should generate ${rule} selector for multiple ${multiple}`, () => {
-          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.${ruleAbbreviation}-${multiple}`);
+          let modifier = multiple === '(1,2)' ? '1\\/2' : multiple;
+          let selector = `.${ruleAbbreviation}-${modifier}`;
+
+          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
           sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}(${multiple})`);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
           let directionAbbreviation = direction.charAt(0);
+          let modifier = multiple === '(1,2)' ? '1\\/2' : multiple;
+          let selector = `.${ruleAbbreviation}${directionAbbreviation}-${modifier}`;
 
           it(`should generate ${rule} ${direction} selector for multiple ${multiple}`, () => {
-            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(`.${ruleAbbreviation}${directionAbbreviation}-${multiple}`);
+            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
             sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}-${direction}(${multiple})`);
           })
         });

@@ -4,36 +4,35 @@
     $name-token: '-' + $name;
   }
 
-  @each $mult in $elegant-spacing-multiples {
-    $modifier: elegant-multiple-modifier($mult);
-    $value: elegant-multiple-value($mult);
+  @each $spacer-key in $elegant-spacer-keys {
+    $modifier: elegant-multiple-modifier($spacer-key);
 
     .m#{$name-token}-#{$modifier} {
-      @include margin($value);
+      @include margin($spacer-key);
     }
 
     .mt#{$name-token}-#{$modifier} {
-      @include margin-top($value);
+      @include margin-top($spacer-key);
     }
 
     .mr#{$name-token}-#{$modifier} {
-      @include margin-right($value);
+      @include margin-right($spacer-key);
     }
 
     .mb#{$name-token}-#{$modifier} {
-      @include margin-bottom($value);
+      @include margin-bottom($spacer-key);
     }
 
     .ml#{$name-token}-#{$modifier} {
-      @include margin-left($value);
+      @include margin-left($spacer-key);
     }
 
     .mv#{$name-token}-#{$modifier} {
-      @include margin-vertical($value);
+      @include margin-vertical($spacer-key);
     }
 
     .mh#{$name-token}-#{$modifier} {
-      @include margin-horizontal($value);
+      @include margin-horizontal($spacer-key);
     }
   }
 }
@@ -44,36 +43,35 @@
     $name-token: '-' + $name;
   }
 
-  @each $mult in $elegant-spacing-multiples {
-    $modifier: elegant-multiple-modifier($mult);
-    $value: elegant-multiple-value($mult);
+  @each $spacer-key in $elegant-spacer-keys {
+    $modifier: $spacer-key;
 
     .p#{$name-token}-#{$modifier} {
-      @include padding($value);
+      @include padding($spacer-key);
     }
 
     .pt#{$name-token}-#{$modifier} {
-      @include padding-top($value);
+      @include padding-top($spacer-key);
     }
 
     .pr#{$name-token}-#{$modifier} {
-      @include padding-right($value);
+      @include padding-right($spacer-key);
     }
 
     .pb#{$name-token}-#{$modifier} {
-      @include padding-bottom($value);
+      @include padding-bottom($spacer-key);
     }
 
     .pl#{$name-token}-#{$modifier} {
-      @include padding-left($value);
+      @include padding-left($spacer-key);
     }
 
     .pv#{$name-token}-#{$modifier} {
-      @include padding-vertical($value);
+      @include padding-vertical($spacer-key);
     }
 
     .ph#{$name-token}-#{$modifier} {
-      @include padding-horizontal($value);
+      @include padding-horizontal($spacer-key);
     }
   }
 }

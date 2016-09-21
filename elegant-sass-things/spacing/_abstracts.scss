@@ -15,6 +15,16 @@ $elegant-spacing-unit: map-get($elegant-spacing, 'unit');
 $elegant-spacing-multiples: map-get($elegant-spacing, 'multiples');
 $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 
+@function elegant-spacers() {
+  $spacers: ();
+  @each $mult in $elegant-spacing-multiples {
+    $k: elegant-multiple-modifier($mult) + "";
+    $v: elegant-multiple(elegant-multiple-value($mult));
+    $spacers: map-merge($spacers, ($k: $v));
+  }
+  @return $spacers;
+}
+
 @function contains($list, $item) {
   @if index($list, $item) { @return true; }
   @return false;
@@ -33,6 +43,10 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
     }
   }
   @return false;
+}
+
+@function elegant-spacer-get($key) {
+  @return map-get($elegant-spacers, $key + "");
 }
 
 @function elegant-multiple-is-fraction($value) {
@@ -78,9 +92,9 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 
 @mixin elegant-v-h($rule, $v-h, $h: null) {
   @if ($h) {
-    #{$rule}: elegant-multiple($v-h) elegant-multiple($h);
+    #{$rule}: elegant-spacer-get($v-h) elegant-spacer-get($h);
   } @else {
-    #{$rule}: elegant-multiple($v-h);
+    #{$rule}: elegant-spacer-get($v-h);
   }
 }
 
@@ -88,46 +102,59 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
   @include elegant-v-h('margin', $v-h, $h);
 }
 @mixin margin-top($mult: 1) {
-  margin-top: elegant-multiple($mult);
+  margin-top: elegant-spacer-get($mult);
 }
 @mixin margin-right($mult: 1) {
-  margin-right: elegant-multiple($mult);
+  margin-right: elegant-spacer-get($mult);
 }
 @mixin margin-bottom($mult: 1) {
-  margin-bottom: elegant-multiple($mult);
+  margin-bottom: elegant-spacer-get($mult);
 }
 @mixin margin-left($mult: 1) {
-  margin-left: elegant-multiple($mult);
+  margin-left: elegant-spacer-get($mult);
 }
 @mixin margin-vertical($mult: 1) {
-  margin-top: elegant-multiple($mult);
-  margin-bottom: elegant-multiple($mult);
+  margin-top: elegant-spacer-get($mult);
+  margin-bottom: elegant-spacer-get($mult);
 }
 @mixin margin-horizontal($mult: 1) {
-  margin-left: elegant-multiple($mult);
-  margin-right: elegant-multiple($mult);
+  margin-left: elegant-spacer-get($mult);
+  margin-right: elegant-spacer-get($mult);
 }
 
 @mixin padding($v-h: 1, $h: null) {
   @include elegant-v-h('padding', $v-h, $h);
 }
 @mixin padding-top($mult: 1) {
-  padding-top: elegant-multiple($mult);
+  padding-top: elegant-spacer-get($mult);
 }
 @mixin padding-right($mult: 1) {
-  padding-right: elegant-multiple($mult);
+  padding-right: elegant-spacer-get($mult);
 }
 @mixin padding-bottom($mult: 1) {
-  padding-bottom: elegant-multiple($mult);
+  padding-bottom: elegant-spacer-get($mult);
 }
 @mixin padding-left($mult: 1) {
-  padding-left: elegant-multiple($mult);
+  padding-left: elegant-spacer-get($mult);
 }
 @mixin padding-vertical($mult: 1) {
-  padding-top: elegant-multiple($mult);
-  padding-bottom: elegant-multiple($mult);
+  padding-top: elegant-spacer-get($mult);
+  padding-bottom: elegant-spacer-get($mult);
 }
 @mixin padding-horizontal($mult: 1) {
-  padding-left: elegant-multiple($mult);
-  padding-right: elegant-multiple($mult);
+  padding-left: elegant-spacer-get($mult);
+  padding-right: elegant-spacer-get($mult);
+}
+
+$elegant-spacers: map-get($elegant-spacing, 'spacers');
+$elegant-spacers: elegant-spacers() !default;
+$elegant-spacer-keys: map-keys($elegant-spacers);
+$elegant-spacer-values: map-values($elegant-spacers);
+
+@function _elegant-spacer-keys() {
+  @return $elegant-spacer-keys;
+}
+
+@function _elegant-spacer-values() {
+  @return $elegant-spacer-values;
 }

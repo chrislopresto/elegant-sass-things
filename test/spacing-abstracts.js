@@ -53,6 +53,59 @@ describe('spacing/_abstracts.scss', () => {
     });
   });
 
+  describe('elegant-spacers', () => {
+    it('should generate spacer map from multiples and unit', () => {
+      const sassaby = new Sassaby(file, {
+        variables: {
+          'elegant-spacing': `(
+            multiples: ((1,2) 1 2 3)
+          )`
+        }
+      });
+      let expectedSpacerKeys = `"1\\\\/2","1","2","3"`;
+      let expectedSpacerValues = `.5rem,1rem,2rem,3rem`;
+      sassaby.func('_elegant-spacer-keys').calledWithArgs('').equals(expectedSpacerKeys);
+      sassaby.func('_elegant-spacer-values').calledWithArgs('').equals(expectedSpacerValues);
+    });
+
+    it('should respect spacer map passed in', () => {
+      const sassaby = new Sassaby(file, {
+        variables: {
+          'elegant-spacing': `(
+            multiples: ((1,2) 1 2 3),
+            spacers: (
+              '0': 0rem,
+              '1\\/2': .5rem,
+              '1': 1rem,
+              '3': 3rem,
+              'none': 0,
+              'half': .5rem,
+              'wide': 10rem
+            )
+          )`
+        }
+      });
+      let expectedSpacerKeys = `"0","1\/2","1","3","none","half","wide"`;
+      let expectedSpacerValues = `0rem,0.5rem,1rem,3rem,0,0.5rem,10rem`;
+      sassaby.func('_elegant-spacer-keys').calledWithArgs('').equals(expectedSpacerKeys);
+      sassaby.func('_elegant-spacer-values').calledWithArgs('').equals(expectedSpacerValues);
+    });
+  });
+
+  describe('elegant-spacer-get', () => {
+    const sassaby = new Sassaby(file, {
+      variables: {
+        'elegant-spacing': `(
+          multiples: ((1,2) 1 2 3)
+        )`
+      }
+    });
+
+    it('should get value from spacer map by key', () => {
+      sassaby.func('elegant-spacer-get').calledWithArgs('1').equals('1rem');
+    });
+  });
+
   describe('elegant-multiple-is-fraction', () => {
     const sassaby = new Sassaby(file);
 
