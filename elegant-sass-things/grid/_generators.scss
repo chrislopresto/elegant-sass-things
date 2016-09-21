@@ -5,7 +5,7 @@
   }
 
   .#{$elegant-grid-selector-prefix}col#{$name-token} {
-    @include col-auto;
+    @include col-even;
   }
 
   @for $i from 1 through $elegant-grid-columns {

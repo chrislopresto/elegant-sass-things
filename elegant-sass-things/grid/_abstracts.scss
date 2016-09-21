@@ -43,6 +43,12 @@ $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
 @mixin col-auto {
   @include col;
 
+  flex-basis: auto;
+}
+
+@mixin col-even {
+  @include col;
+
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
