@@ -65,6 +65,10 @@
   .#{$elegant-grid-selector-prefix}row {
     @include row;
 
+    &-debug {
+      @include row-debug;
+    }
+
     &.reverse {
       @include row-reverse;
     }

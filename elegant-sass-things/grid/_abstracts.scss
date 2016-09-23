@@ -6,7 +6,13 @@ $elegant-grid-defaults: (
   ),
   gutter: 1rem,
   columns: 12,
-  selector-prefix: 'g-'
+  selector-prefix: 'g-',
+  debug: (
+    mode: 'off',
+    color: #000,
+    transparency: .98,
+    grid-size: 1rem
+  )
 );
 
 $elegant-grid: () !default;
@@ -17,6 +23,9 @@ $elegant-grid-columns: map-get($elegant-grid, 'columns');
 $elegant-grid-breakpoints: map-get($elegant-grid, 'breakpoints');
 $elegant-grid-selector-prefix: map-get($elegant-grid, 'selector-prefix');
 $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
+$elegant-grid-debug: map-get($elegant-grid, 'debug');
+$elegant-grid-debug-color: rgba(map-get($elegant-grid-debug, 'color'), map-get($elegant-grid-debug, 'transparency'));
+$elegant-grid-debug-grid-size: map-get($elegant-grid-debug, 'grid-size');
 
 @mixin row {
   box-sizing: border-box;
@@ -26,6 +35,11 @@ $elegant-grid-gutter-compensation: $elegant-grid-gutter * -.5;
   flex-wrap: wrap;
   margin-right: $elegant-grid-gutter * -.5;
   margin-left: $elegant-grid-gutter * -.5;
+}
+
+@mixin row-debug {
+  background-image: linear-gradient(0deg, $elegant-grid-debug-color, $elegant-grid-debug-color 1%, transparent 2%, transparent 99%, $elegant-grid-debug-color), linear-gradient(90deg, $elegant-grid-debug-color, $elegant-grid-debug-color 1%, transparent 2%, transparent 99%, $elegant-grid-debug-color);
+  background-size: ($elegant-grid-debug-grid-size) ($elegant-grid-debug-grid-size);
 }
 
 @mixin row-reverse {
