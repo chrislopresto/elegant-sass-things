@@ -10,7 +10,7 @@ body {
 .Demo-container {
   max-width: 20rem; }
   .Demo-container > div {
-    height: 3rem;
+    height: 8rem;
     width: 10rem;
     border: 1px solid magenta;
     border-radius: 4px; }
