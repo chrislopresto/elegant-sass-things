@@ -1,6 +1,11 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var connect = require('gulp-connect');
+var autoprefixer = require('gulp-autoprefixer');
+
+var autoprefixerOptions = {
+  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+};
 
 gulp.task('connect', function(){
   connect.server({
@@ -13,12 +18,14 @@ gulp.task('connect', function(){
 gulp.task('sass', function () {
   return gulp.src('./elegant-sass-things.scss')
       .pipe(sass({ errLogToConsole: true }))
+      .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest('./docs/css'));
 });
 
 gulp.task('demo-sass', function () {
   return gulp.src('./demo/demo.scss')
       .pipe(sass({ errLogToConsole: true }))
+      .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest('./docs/css'));
 });
 
