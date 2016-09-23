@@ -16,7 +16,8 @@
   margin-left: -0.5rem; }
   .g-row-debug {
     background-image: -webkit-repeating-linear-gradient(left, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px)), -webkit-repeating-linear-gradient(top, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px));
-    background-image: repeating-linear-gradient(to right, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px)), repeating-linear-gradient(to bottom, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px)); }
+    background-image: repeating-linear-gradient(to right, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px)), repeating-linear-gradient(to bottom, transparent 1px, transparent 1rem, rgba(0, 0, 0, 0.4) calc(1rem + 1px), rgba(0, 0, 0, 0.4) calc(1rem + 1px));
+    background-size: 1rem 1rem; }
   .g-row.reverse {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;

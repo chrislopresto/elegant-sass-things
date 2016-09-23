@@ -37,7 +37,8 @@ $elegant-grid-debug-grid-size: map-get($elegant-grid-debug, 'grid-size');
 }
 
 @mixin row-debug {
-  background-image: repeating-linear-gradient(to right, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px)), repeating-linear-gradient(to bottom, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px))
+  background-image: repeating-linear-gradient(to right, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px)), repeating-linear-gradient(to bottom, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px));
+  background-size: 1rem 1rem;
 }
 
 @mixin row-reverse {
