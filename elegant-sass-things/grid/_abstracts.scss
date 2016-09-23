@@ -9,7 +9,7 @@ $elegant-grid-defaults: (
   selector-prefix: 'g-',
   debug: (
     color: #000,
-    transparency: .98,
+    transparency: .4,
     grid-size: 1rem
   )
 );
@@ -37,8 +37,7 @@ $elegant-grid-debug-grid-size: map-get($elegant-grid-debug, 'grid-size');
 }
 
 @mixin row-debug {
-  background-image: linear-gradient(0deg, $elegant-grid-debug-color, $elegant-grid-debug-color 1%, transparent 2%, transparent 99%, $elegant-grid-debug-color), linear-gradient(90deg, $elegant-grid-debug-color, $elegant-grid-debug-color 1%, transparent 2%, transparent 99%, $elegant-grid-debug-color);
-  background-size: ($elegant-grid-debug-grid-size) ($elegant-grid-debug-grid-size);
+  background-image: repeating-linear-gradient(to right, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px)), repeating-linear-gradient(to bottom, transparent 1px, transparent 1rem, $elegant-grid-debug-color calc(1rem + 1px), $elegant-grid-debug-color calc(1rem + 1px))
 }
 
 @mixin row-reverse {
