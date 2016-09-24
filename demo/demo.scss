@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   font-family: Raleway, sans-serif;
   font-size: 62.5%;
+  min-width: 320px;
 }
 
 *, *:before, *:after {
@@ -12,13 +13,24 @@ body {
 
 .Demo {
   &-container {
-    max-width: 20rem;
+    &--spacing {
+      max-width: 20rem;
 
-    > div {
-      height: 8rem;
-      width: 10rem;
-      border: 1px solid magenta;
-      border-radius: 4px;
+      > div {
+        border: 1px solid magenta;
+        border-radius: 4px;
+        height: 8rem;
+        width: 10rem;
+      }
+    }
+
+    &--grid {
+      .box-row {
+        background-color: rgba(cyan, .4);
+        border: 1px solid magenta;
+        border-radius: 4px;
+        height: 2rem;
+      }
     }
   }
 }

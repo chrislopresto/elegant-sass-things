@@ -2,15 +2,22 @@
 body {
   box-sizing: border-box;
   font-family: Raleway, sans-serif;
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  min-width: 320px; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
 
-.Demo-container {
+.Demo-container--spacing {
   max-width: 20rem; }
-  .Demo-container > div {
-    height: 8rem;
-    width: 10rem;
+  .Demo-container--spacing > div {
     border: 1px solid magenta;
-    border-radius: 4px; }
+    border-radius: 4px;
+    height: 8rem;
+    width: 10rem; }
+
+.Demo-container--grid .box-row {
+  background-color: rgba(0, 255, 255, 0.4);
+  border: 1px solid magenta;
+  border-radius: 4px;
+  height: 2rem; }
