@@ -8,6 +8,21 @@ body {
 *, *:before, *:after {
   box-sizing: inherit; }
 
+.Demo-container pre {
+  overflow-x: auto;
+  padding: 1.25em;
+  border: 1px solid magenta;
+  border-left-width: 4px;
+  margin: 1.6em 0;
+  font-size: .875em;
+  background: #fcfcfc;
+  border-radius: 4px;
+  white-space: pre;
+  word-wrap: normal; }
+
+.Demo-container code {
+  color: #666; }
+
 .Demo-container--spacing {
   max-width: 20rem; }
   .Demo-container--spacing > div {
@@ -16,8 +31,30 @@ body {
     height: 8rem;
     width: 10rem; }
 
+.Demo-container--grid .box,
+.Demo-container--grid .box-small,
+.Demo-container--grid .box-large,
 .Demo-container--grid .box-row {
   background-color: rgba(0, 255, 255, 0.4);
   border: 1px solid magenta;
   border-radius: 4px;
-  height: 2rem; }
+  min-height: 1rem; }
+
+.Demo-container--grid .box-container {
+  padding: .5rem; }
+
+.Demo-container--grid .box-first {
+  background-color: rgba(255, 255, 0, 0.6);
+  border-radius: 4px;
+  min-height: 1rem; }
+
+.Demo-container--grid .box-nested {
+  background-color: rgba(0, 255, 0, 0.6);
+  border-radius: 4px;
+  min-height: 1rem; }
+
+.Demo-container--grid .box-small {
+  min-height: 1rem; }
+
+.Demo-container--grid .box-large {
+  min-height: 6rem; }

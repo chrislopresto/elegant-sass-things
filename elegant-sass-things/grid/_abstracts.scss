@@ -97,14 +97,17 @@ $elegant-grid-debug-grid-size: map-get($elegant-grid-debug, 'grid-size');
 
 @mixin row-align-top {
   align-items: flex-start;
+  text-align: start;
 }
 
 @mixin row-align-center {
   align-items: center;
+  text-align: center;
 }
 
 @mixin row-align-bottom {
   align-items: flex-end;
+  text-align: end;
 }
 
 @mixin row-justify-around {

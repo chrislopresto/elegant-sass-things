@@ -13,6 +13,23 @@ body {
 
 .Demo {
   &-container {
+    pre {
+      overflow-x: auto;
+      padding: 1.25em;
+      border: 1px solid magenta;
+      border-left-width: 4px;
+      margin: 1.6em 0;
+      font-size: .875em;
+      background: #fcfcfc;
+      border-radius: 4px;
+      white-space: pre;
+      word-wrap: normal;
+    }
+
+    code {
+      color: #666;
+    }
+
     &--spacing {
       max-width: 20rem;
 
@@ -25,11 +42,38 @@ body {
     }
 
     &--grid {
+      .box,
+      .box-small,
+      .box-large,
       .box-row {
         background-color: rgba(cyan, .4);
         border: 1px solid magenta;
         border-radius: 4px;
-        height: 2rem;
+        min-height: 1rem;
+      }
+
+      .box-container {
+        padding: .5rem;
+      }
+
+      .box-first {
+        background-color: rgba(yellow, .6);
+        border-radius: 4px;
+        min-height: 1rem;
+      }
+
+      .box-nested {
+        background-color: rgba(lime, .6);
+        border-radius: 4px;
+        min-height: 1rem;
+      }
+
+      .box-small {
+        min-height: 1rem;
+      }
+
+      .box-large {
+        min-height: 6rem;
       }
     }
   }

@@ -350,19 +350,22 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
               -ms-grid-row-align: flex-start;
-          align-items: flex-start; }
+          align-items: flex-start;
+  text-align: start; }
 
 .align-center {
   -webkit-box-align: center;
       -ms-flex-align: center;
               -ms-grid-row-align: center;
-          align-items: center; }
+          align-items: center;
+  text-align: center; }
 
 .align-bottom {
   -webkit-box-align: end;
       -ms-flex-align: end;
               -ms-grid-row-align: flex-end;
-          align-items: flex-end; }
+          align-items: flex-end;
+  text-align: end; }
 
 .justify-around {
   -ms-flex-pack: distribute;
@@ -682,17 +685,20 @@
     -webkit-box-align: start;
         -ms-flex-align: start;
                 -ms-grid-row-align: flex-start;
-            align-items: flex-start; }
+            align-items: flex-start;
+    text-align: start; }
   .align-center-sm {
     -webkit-box-align: center;
         -ms-flex-align: center;
                 -ms-grid-row-align: center;
-            align-items: center; }
+            align-items: center;
+    text-align: center; }
   .align-bottom-sm {
     -webkit-box-align: end;
         -ms-flex-align: end;
                 -ms-grid-row-align: flex-end;
-            align-items: flex-end; }
+            align-items: flex-end;
+    text-align: end; }
   .justify-around-sm {
     -ms-flex-pack: distribute;
         justify-content: space-around; }
@@ -1008,17 +1014,20 @@
     -webkit-box-align: start;
         -ms-flex-align: start;
                 -ms-grid-row-align: flex-start;
-            align-items: flex-start; }
+            align-items: flex-start;
+    text-align: start; }
   .align-center-md {
     -webkit-box-align: center;
         -ms-flex-align: center;
                 -ms-grid-row-align: center;
-            align-items: center; }
+            align-items: center;
+    text-align: center; }
   .align-bottom-md {
     -webkit-box-align: end;
         -ms-flex-align: end;
                 -ms-grid-row-align: flex-end;
-            align-items: flex-end; }
+            align-items: flex-end;
+    text-align: end; }
   .justify-around-md {
     -ms-flex-pack: distribute;
         justify-content: space-around; }
@@ -1334,17 +1343,20 @@
     -webkit-box-align: start;
         -ms-flex-align: start;
                 -ms-grid-row-align: flex-start;
-            align-items: flex-start; }
+            align-items: flex-start;
+    text-align: start; }
   .align-center-lg {
     -webkit-box-align: center;
         -ms-flex-align: center;
                 -ms-grid-row-align: center;
-            align-items: center; }
+            align-items: center;
+    text-align: center; }
   .align-bottom-lg {
     -webkit-box-align: end;
         -ms-flex-align: end;
                 -ms-grid-row-align: flex-end;
-            align-items: flex-end; }
+            align-items: flex-end;
+    text-align: end; }
   .justify-around-lg {
     -ms-flex-pack: distribute;
         justify-content: space-around; }
