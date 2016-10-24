@@ -21,5 +21,8 @@ export default {
     root: './docs',
     src: './docs/**/*',
     watch: './docs/**/*'
+  },
+  jsServer: {
+    port: 9000
   }
 };
