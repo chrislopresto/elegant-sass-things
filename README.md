@@ -22,3 +22,9 @@ All functions and mixins unit tested by [Sassaby](https://github.com/ryanbahniuk
 ## Running Tests
 
   * `npm test` or `npm run test-watch`
+
+## Inspiration
+
+- [Flexbox Grid](http://flexboxgrid.com/) for a solid grid
+- [Reflexbox](http://jxnblk.com/reflexbox/) for the grid debug mode
+- [Gridilydidily](https://philippkuehn.github.io/gridilydidily/) for its overridable config
