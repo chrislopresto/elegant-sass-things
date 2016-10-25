@@ -71,7 +71,7 @@ export function watchJsServer(done) {
 }
 
 export function getJsServerOutput() {
-  return gulp.src(webpackConfig.entry)
+  return gulp.src(config.jsServer.src)
     .pipe(gulpWebpack(webpackConfig, webpack))
     .pipe(gulp.dest(config.jsServer.dest));
 }

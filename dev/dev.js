@@ -7,7 +7,8 @@ import config from '../config';
 
 const app = express();
 const compiler = webpack(webpackConfig);
-const middleware = webpackMiddleware(compiler, {
+
+let webpackMiddlewareOptions = {
   publicPath: webpackConfig.output.publicPath,
   stats: {
     colors: true,
@@ -17,10 +18,9 @@ const middleware = webpackMiddleware(compiler, {
     chunkModules: false,
     modules: false,
   }
-});
+};
+app.use(webpackMiddleware(compiler, webpackMiddlewareOptions));
 
-app.use(middleware);
-
-app.listen(config.jsServer.port, function () {
+app.listen(config.jsServer.port, () => {
   console.log(`JS server started: http://${config.jsServer.hostname}:${config.jsServer.port}`);
 });

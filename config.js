@@ -29,6 +29,7 @@ module.exports = {
     hostname: 'localhost',
     port: 8889,
     script: './dist/dev.js',
+    src: './demo/js/**/*.js',
     dest: './docs/js/',
     watch: [
       './demo/js/**/*.js',
