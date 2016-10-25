@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   librarySass: {
     src: './elegant-sass-things.scss',
     dest: './docs/css',
@@ -8,21 +8,36 @@ export default {
     ]
   },
   demoSass: {
-    src: './demo/demo.scss',
+    src: './demo/scss/demo.scss',
     dest: './docs/css',
-    watch: './demo/demo.scss'
+    watch: './demo/scss/demo.scss'
   },
   autoprefixer: {
     browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
   },
   server: {
-    liveReload: true,
+    liveReload: {
+      hostname: 'localhost',
+      port: 38888
+    },
     port: 8888,
     root: './docs',
     src: './docs/**/*',
     watch: './docs/**/*'
   },
   jsServer: {
-    port: 9000
+    hostname: 'localhost',
+    port: 8889,
+    script: './dist/dev.js',
+    dest: './docs/js/',
+    watch: [
+      './demo/js/**/*.js',
+      './dev/**/*.js',
+      './webpack.config.js'
+    ],
+    transpile: {
+      src: './dev/**/*.js',
+      dest: './dist/'
+    }
   }
 };
