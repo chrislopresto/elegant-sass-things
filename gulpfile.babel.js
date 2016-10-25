@@ -9,27 +9,27 @@ import webpack from 'webpack';
 import config from './config';
 import webpackConfig from './webpack.config';
 
-export function compileLibrarySassStep() {
+export function compileLibrarySass() {
   return gulp.src(config.librarySass.src)
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer(config.autoprefixer))
     .pipe(gulp.dest(config.librarySass.dest));
 }
 
-export function watchLibrarySassStep(done) {
-  gulp.watch(config.librarySass.watch).on('change', compileLibrarySassStep);
+export function watchLibrarySass(done) {
+  gulp.watch(config.librarySass.watch).on('change', compileLibrarySass);
   done();
 }
 
-export function compileDemoSassStep() {
+export function compileDemoSass() {
   return gulp.src(config.demoSass.src)
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer(config.autoprefixer))
     .pipe(gulp.dest(config.demoSass.dest));
 }
 
-export function watchDemoSassStep(done) {
-  gulp.watch(config.demoSass.watch).on('change', compileDemoSassStep);
+export function watchDemoSass(done) {
+  gulp.watch(config.demoSass.watch).on('change', compileDemoSass);
   done();
 }
 
@@ -76,29 +76,18 @@ export function getJsServerOutput() {
     .pipe(gulp.dest(config.jsServer.dest));
 }
 
-const compileLibrarySass = () => compileLibrarySassStep();
-const compileDemoSass = () => compileDemoSassStep();
-const watchLibrarySass = (done) => watchLibrarySassStep(done);
-const watchDemoSass = (done) => watchDemoSassStep(done);
-const watchLiveReloadServer = (done) => watchServer(done);
-const connectLiveReloadServer = (done) => connectServer(done);
-const transpileJsDevServer = (done) => transpileJsServer(done);
-const startJsDevServer = (done) => startJsServer(done);
-const watchJsDevServer = (done) => watchJsServer(done);
-const getJsDevServerOutput = (done) => getJsServerOutput();
-
 const build = gulp.series(
   transpileJsServer,
-  startJsDevServer,
+  startJsServer,
   getJsServerOutput,
   gulp.parallel(
     compileLibrarySass,
     compileDemoSass,
     watchLibrarySass,
     watchDemoSass,
-    watchLiveReloadServer,
-    watchJsDevServer,
-    connectLiveReloadServer
+    watchServer,
+    watchJsServer,
+    connectServer
   )
 );
 
