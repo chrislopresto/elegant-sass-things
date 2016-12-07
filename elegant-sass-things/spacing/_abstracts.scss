@@ -46,7 +46,11 @@ $elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
 }
 
 @function elegant-spacer-get($key) {
-  @return map-get($elegant-spacers, $key + '');
+  $s: map-get($elegant-spacers, elegant-multiple-modifier($key) + '');
+  @if ($s == null) {
+    @error 'elegant-sass-things error: ' + $key + ' is an invalid spacer. You can configure this list in the $elegant-spacing config map.';
+  }
+  @return $s;
 }
 
 @function elegant-multiple-is-fraction($value) {
@@ -157,4 +161,12 @@ $elegant-spacer-values: map-values($elegant-spacers);
 
 @function _elegant-spacer-values() {
   @return $elegant-spacer-values;
+}
+
+@function elegant-valid-spacer($value) {
+  $valid-spacer: contains(_elegant-spacer-keys(), $value);
+  @if $valid-spacer {
+    @return true;
+  }
+  @return false;
 }
