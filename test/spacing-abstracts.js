@@ -104,6 +104,14 @@ describe('spacing/_abstracts.scss', () => {
     it('should get value from spacer map by key', () => {
       sassaby.func('elegant-spacer-get').calledWithArgs('1').equals('1rem');
     });
+
+    it('should raise error if passed invalid key', () => {
+      let usageWithInvalidSpacer = () => {
+        sassaby.func('elegant-spacer-get').calledWithArgs('torpedo');
+      };
+
+      assert.throws(usageWithInvalidSpacer, /torpedo is an invalid spacer/);
+    });
   });
 
   describe('elegant-multiple-is-fraction', () => {
