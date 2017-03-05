@@ -13,6 +13,9 @@ body {
 
 .Demo {
   &-container {
+    display: flex;
+    margin-bottom: 1rem;
+
     pre {
       overflow-x: auto;
       padding: 1.25em;
@@ -31,13 +34,8 @@ body {
     }
 
     &--spacing {
-      max-width: 20rem;
-
       > div {
         border: 1px solid magenta;
-        border-radius: 4px;
-        height: 8rem;
-        width: 10rem;
       }
     }
 
@@ -76,5 +74,19 @@ body {
         min-height: 6rem;
       }
     }
+  }
+
+  &-content {
+    display: inline-flex;
+  }
+
+  &-item {
+    background: rgba(#333, .6);
+  }
+
+  &-bit {
+    width: 9rem;
+    height: 9rem;
+    background-color: cyan;
   }
 }
