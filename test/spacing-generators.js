@@ -9,8 +9,11 @@ describe('spacing/_generators.scss', () => {
     const sassaby = new Sassaby(file, {
       variables: {
         'elegant-spacing': `(
-          unit: 1rem,
-          multiples: ((1, 2) 1 2)
+          spacers: (
+            'a': 0.5rem,
+            'b': 1rem,
+            'c': 2rem
+          )
         )`
       },
       dependencies: [
@@ -21,23 +24,21 @@ describe('spacing/_generators.scss', () => {
     ['margin', 'padding'].forEach((rule) => {
       let ruleAbbreviation = rule.charAt(0);
 
-      ['(1,2)', '1', '2'].forEach((multiple) => {
-        it(`should generate ${rule} selector for multiple ${multiple}`, () => {
-          let modifier = multiple === '(1,2)' ? '1\\/2' : multiple;
-          let selector = `.${ruleAbbreviation}-${modifier}`;
+      ['a', 'b', 'c'].forEach((spacer) => {
+        it(`should generate ${rule} selector for spacer ${spacer}`, () => {
+          let selector = `.${ruleAbbreviation}-${spacer}`;
 
           sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
-          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}(${multiple})`);
+          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}(${spacer})`);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
           let directionAbbreviation = direction.charAt(0);
-          let modifier = multiple === '(1,2)' ? '1\\/2' : multiple;
-          let selector = `.${ruleAbbreviation}${directionAbbreviation}-${modifier}`;
+          let selector = `.${ruleAbbreviation}${directionAbbreviation}-${spacer}`;
 
-          it(`should generate ${rule} ${direction} selector for multiple ${multiple}`, () => {
+          it(`should generate ${rule} ${direction} selector for spacer ${spacer}`, () => {
             sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
-            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}-${direction}(${multiple})`);
+            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}-${direction}(${spacer})`);
           })
         });
       });
