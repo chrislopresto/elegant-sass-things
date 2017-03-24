@@ -9,6 +9,7 @@ describe('spacing/_generators.scss', () => {
     const sassaby = new Sassaby(file, {
       variables: {
         'est-spacing': `(
+          prefix: 'foo',
           spacers: (
             'a': 0.5rem,
             'b': 1rem,
@@ -26,14 +27,14 @@ describe('spacing/_generators.scss', () => {
 
       ['a', 'b', 'c'].forEach((spacer) => {
         it(`should generate ${rule} selector for spacer ${spacer}`, () => {
-          let selector = `.${ruleAbbreviation}--${spacer}`;
+          let selector = `.foo-${ruleAbbreviation}--${spacer}`;
 
           sassaby.standaloneMixin(`generate-est-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
           let directionAbbreviation = direction.charAt(0);
-          let selector = `.${ruleAbbreviation}-${directionAbbreviation}--${spacer}`;
+          let selector = `.foo-${ruleAbbreviation}-${directionAbbreviation}--${spacer}`;
 
           it(`should generate ${rule} ${direction} selector for spacer ${spacer}`, () => {
             sassaby.standaloneMixin(`generate-est-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);

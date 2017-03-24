@@ -5,6 +5,9 @@
   }
 
   $prefix-token: '';
+  @if ($est-spacing-prefix != '') {
+    $prefix-token: $est-spacing-prefix + '-';
+  }
 
   @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;
@@ -48,6 +51,9 @@
   }
 
   $prefix-token: '';
+  @if ($est-spacing-prefix != '') {
+    $prefix-token: $est-spacing-prefix + '-';
+  }
 
   @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;

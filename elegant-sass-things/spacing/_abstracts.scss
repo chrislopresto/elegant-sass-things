@@ -1,4 +1,5 @@
 $est-spacing-defaults: (
+  prefix: 'est',
   spacers: (
     '0': 0,
     '1': 1rem,
@@ -15,6 +16,7 @@ $est-spacing: () !default;
 $est-spacing: map-merge($est-spacing-defaults, $est-spacing);
 
 $est-spacing-breakpoints: map-get($est-spacing, 'breakpoints');
+$est-spacing-prefix: map-get($est-spacing, 'prefix');
 $est-spacers: map-get($est-spacing, 'spacers');
 $est-spacer-keys: map-keys($est-spacers);
 
