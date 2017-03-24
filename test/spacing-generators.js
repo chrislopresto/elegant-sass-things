@@ -26,19 +26,17 @@ describe('spacing/_generators.scss', () => {
 
       ['a', 'b', 'c'].forEach((spacer) => {
         it(`should generate ${rule} selector for spacer ${spacer}`, () => {
-          let selector = `.${ruleAbbreviation}-${spacer}`;
+          let selector = `.${ruleAbbreviation}--${spacer}`;
 
           sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
-          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}(${spacer})`);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
           let directionAbbreviation = direction.charAt(0);
-          let selector = `.${ruleAbbreviation}${directionAbbreviation}-${spacer}`;
+          let selector = `.${ruleAbbreviation}-${directionAbbreviation}--${spacer}`;
 
           it(`should generate ${rule} ${direction} selector for spacer ${spacer}`, () => {
             sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
-            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().calls(`${rule}-${direction}(${spacer})`);
           })
         });
       });

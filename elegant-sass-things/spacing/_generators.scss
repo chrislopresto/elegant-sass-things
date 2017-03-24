@@ -4,35 +4,39 @@
     $name-token: '-' + $name;
   }
 
+  $prefix-token: '';
+
   @each $spacer-key in $elegant-spacer-keys {
     $modifier: $spacer-key;
 
-    .m#{$name-token}-#{$modifier} {
-      @include margin($spacer-key);
+    .#{$prefix-token}m#{$name-token}--#{$modifier} {
+      margin: elegant-spacer-get($spacer-key);
     }
 
-    .mt#{$name-token}-#{$modifier} {
-      @include margin-top($spacer-key);
+    .#{$prefix-token}m-t#{$name-token}--#{$modifier} {
+      margin-top: elegant-spacer-get($spacer-key);
     }
 
-    .mr#{$name-token}-#{$modifier} {
-      @include margin-right($spacer-key);
+    .#{$prefix-token}m-r#{$name-token}--#{$modifier} {
+      margin-right: elegant-spacer-get($spacer-key);
     }
 
-    .mb#{$name-token}-#{$modifier} {
-      @include margin-bottom($spacer-key);
+    .#{$prefix-token}m-b#{$name-token}--#{$modifier} {
+      margin-bottom: elegant-spacer-get($spacer-key);
     }
 
-    .ml#{$name-token}-#{$modifier} {
-      @include margin-left($spacer-key);
+    .#{$prefix-token}m-l#{$name-token}--#{$modifier} {
+      margin-left: elegant-spacer-get($spacer-key);
     }
 
-    .mv#{$name-token}-#{$modifier} {
-      @include margin-vertical($spacer-key);
+    .#{$prefix-token}m-v#{$name-token}--#{$modifier} {
+      margin-bottom: elegant-spacer-get($spacer-key);
+      margin-top: elegant-spacer-get($spacer-key);
     }
 
-    .mh#{$name-token}-#{$modifier} {
-      @include margin-horizontal($spacer-key);
+    .#{$prefix-token}m-h#{$name-token}--#{$modifier} {
+      margin-left: elegant-spacer-get($spacer-key);
+      margin-right: elegant-spacer-get($spacer-key);
     }
   }
 }
@@ -43,35 +47,39 @@
     $name-token: '-' + $name;
   }
 
+  $prefix-token: '';
+
   @each $spacer-key in $elegant-spacer-keys {
     $modifier: $spacer-key;
 
-    .p#{$name-token}-#{$modifier} {
-      @include padding($spacer-key);
+    .#{$prefix-token}p#{$name-token}--#{$modifier} {
+      padding: elegant-spacer-get($spacer-key);
     }
 
-    .pt#{$name-token}-#{$modifier} {
-      @include padding-top($spacer-key);
+    .#{$prefix-token}p-t#{$name-token}--#{$modifier} {
+      padding-top: elegant-spacer-get($spacer-key);
     }
 
-    .pr#{$name-token}-#{$modifier} {
-      @include padding-right($spacer-key);
+    .#{$prefix-token}p-r#{$name-token}--#{$modifier} {
+      padding-right: elegant-spacer-get($spacer-key);
     }
 
-    .pb#{$name-token}-#{$modifier} {
-      @include padding-bottom($spacer-key);
+    .#{$prefix-token}p-b#{$name-token}--#{$modifier} {
+      padding-bottom: elegant-spacer-get($spacer-key);
     }
 
-    .pl#{$name-token}-#{$modifier} {
-      @include padding-left($spacer-key);
+    .#{$prefix-token}p-l#{$name-token}--#{$modifier} {
+      padding-left: elegant-spacer-get($spacer-key);
     }
 
-    .pv#{$name-token}-#{$modifier} {
-      @include padding-vertical($spacer-key);
+    .#{$prefix-token}p-v#{$name-token}--#{$modifier} {
+      padding-bottom: elegant-spacer-get($spacer-key);
+      padding-top: elegant-spacer-get($spacer-key);
     }
 
-    .ph#{$name-token}-#{$modifier} {
-      @include padding-horizontal($spacer-key);
+    .#{$prefix-token}p-h#{$name-token}--#{$modifier} {
+      padding-left: elegant-spacer-get($spacer-key);
+      padding-right: elegant-spacer-get($spacer-key);
     }
   }
 }
