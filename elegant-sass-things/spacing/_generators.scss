@@ -5,7 +5,7 @@
   }
 
   @each $spacer-key in $elegant-spacer-keys {
-    $modifier: elegant-multiple-modifier($spacer-key);
+    $modifier: $spacer-key;
 
     .m#{$name-token}-#{$modifier} {
       @include margin($spacer-key);
