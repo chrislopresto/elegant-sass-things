@@ -1,97 +1,111 @@
-@mixin generate-elegant-spacing-margin-column-classes($name: null) {
+@mixin generate-est-spacing-margin-column-classes($name: null) {
   $name-token: '';
   @if ($name) {
     $name-token: '-' + $name;
   }
 
-  @each $spacer-key in $elegant-spacer-keys {
+  $prefix-token: '';
+  @if ($est-spacing-prefix != '') {
+    $prefix-token: $est-spacing-prefix + '-';
+  }
+
+  @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;
 
-    .m#{$name-token}-#{$modifier} {
-      @include margin($spacer-key);
+    .#{$prefix-token}m#{$name-token}--#{$modifier} {
+      margin: est-spacing($spacer-key);
     }
 
-    .mt#{$name-token}-#{$modifier} {
-      @include margin-top($spacer-key);
+    .#{$prefix-token}m-t#{$name-token}--#{$modifier} {
+      margin-top: est-spacing($spacer-key);
     }
 
-    .mr#{$name-token}-#{$modifier} {
-      @include margin-right($spacer-key);
+    .#{$prefix-token}m-r#{$name-token}--#{$modifier} {
+      margin-right: est-spacing($spacer-key);
     }
 
-    .mb#{$name-token}-#{$modifier} {
-      @include margin-bottom($spacer-key);
+    .#{$prefix-token}m-b#{$name-token}--#{$modifier} {
+      margin-bottom: est-spacing($spacer-key);
     }
 
-    .ml#{$name-token}-#{$modifier} {
-      @include margin-left($spacer-key);
+    .#{$prefix-token}m-l#{$name-token}--#{$modifier} {
+      margin-left: est-spacing($spacer-key);
     }
 
-    .mv#{$name-token}-#{$modifier} {
-      @include margin-vertical($spacer-key);
+    .#{$prefix-token}m-v#{$name-token}--#{$modifier} {
+      margin-bottom: est-spacing($spacer-key);
+      margin-top: est-spacing($spacer-key);
     }
 
-    .mh#{$name-token}-#{$modifier} {
-      @include margin-horizontal($spacer-key);
+    .#{$prefix-token}m-h#{$name-token}--#{$modifier} {
+      margin-left: est-spacing($spacer-key);
+      margin-right: est-spacing($spacer-key);
     }
   }
 }
 
-@mixin generate-elegant-spacing-padding-column-classes($name: null) {
+@mixin generate-est-spacing-padding-column-classes($name: null) {
   $name-token: '';
   @if ($name) {
     $name-token: '-' + $name;
   }
 
-  @each $spacer-key in $elegant-spacer-keys {
+  $prefix-token: '';
+  @if ($est-spacing-prefix != '') {
+    $prefix-token: $est-spacing-prefix + '-';
+  }
+
+  @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;
 
-    .p#{$name-token}-#{$modifier} {
-      @include padding($spacer-key);
+    .#{$prefix-token}p#{$name-token}--#{$modifier} {
+      padding: est-spacing($spacer-key);
     }
 
-    .pt#{$name-token}-#{$modifier} {
-      @include padding-top($spacer-key);
+    .#{$prefix-token}p-t#{$name-token}--#{$modifier} {
+      padding-top: est-spacing($spacer-key);
     }
 
-    .pr#{$name-token}-#{$modifier} {
-      @include padding-right($spacer-key);
+    .#{$prefix-token}p-r#{$name-token}--#{$modifier} {
+      padding-right: est-spacing($spacer-key);
     }
 
-    .pb#{$name-token}-#{$modifier} {
-      @include padding-bottom($spacer-key);
+    .#{$prefix-token}p-b#{$name-token}--#{$modifier} {
+      padding-bottom: est-spacing($spacer-key);
     }
 
-    .pl#{$name-token}-#{$modifier} {
-      @include padding-left($spacer-key);
+    .#{$prefix-token}p-l#{$name-token}--#{$modifier} {
+      padding-left: est-spacing($spacer-key);
     }
 
-    .pv#{$name-token}-#{$modifier} {
-      @include padding-vertical($spacer-key);
+    .#{$prefix-token}p-v#{$name-token}--#{$modifier} {
+      padding-bottom: est-spacing($spacer-key);
+      padding-top: est-spacing($spacer-key);
     }
 
-    .ph#{$name-token}-#{$modifier} {
-      @include padding-horizontal($spacer-key);
-    }
-  }
-}
-
-@mixin generate-elegant-spacing-margin-classes {
-  @include generate-elegant-spacing-margin-column-classes;
-
-  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
-    @media #{$breakpoint-media-query} {
-      @include generate-elegant-spacing-margin-column-classes($name: $breakpoint-name);
+    .#{$prefix-token}p-h#{$name-token}--#{$modifier} {
+      padding-left: est-spacing($spacer-key);
+      padding-right: est-spacing($spacer-key);
     }
   }
 }
 
-@mixin generate-elegant-spacing-padding-classes {
-  @include generate-elegant-spacing-padding-column-classes;
+@mixin generate-est-spacing-margin-classes {
+  @include generate-est-spacing-margin-column-classes;
 
-  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
+  @each $breakpoint-name, $breakpoint-media-query in $est-spacing-breakpoints {
     @media #{$breakpoint-media-query} {
-      @include generate-elegant-spacing-padding-column-classes($name: $breakpoint-name);
+      @include generate-est-spacing-margin-column-classes($name: $breakpoint-name);
+    }
+  }
+}
+
+@mixin generate-est-spacing-padding-classes {
+  @include generate-est-spacing-padding-column-classes;
+
+  @each $breakpoint-name, $breakpoint-media-query in $est-spacing-breakpoints {
+    @media #{$breakpoint-media-query} {
+      @include generate-est-spacing-padding-column-classes($name: $breakpoint-name);
     }
   }
 }

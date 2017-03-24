@@ -1,4 +1,5 @@
-$elegant-spacing-defaults: (
+$est-spacing-defaults: (
+  prefix: 'est',
   spacers: (
     '0': 0,
     '1': 1rem,
@@ -11,90 +12,22 @@ $elegant-spacing-defaults: (
   ),
 );
 
-$elegant-spacing: () !default;
-$elegant-spacing: map-merge($elegant-spacing-defaults, $elegant-spacing);
+$est-spacing: () !default;
+$est-spacing: map-merge($est-spacing-defaults, $est-spacing);
 
-$elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
-$elegant-spacers: map-get($elegant-spacing, 'spacers');
-$elegant-spacer-keys: map-keys($elegant-spacers);
+$est-spacing-breakpoints: map-get($est-spacing, 'breakpoints');
+$est-spacing-prefix: map-get($est-spacing, 'prefix');
+$est-spacers: map-get($est-spacing, 'spacers');
+$est-spacer-keys: map-keys($est-spacers);
 
 @function contains($list, $item) {
   @if index($list, $item) { @return true; }
   @return false;
 }
 
-@function elegant-spacer-get($key) {
-  @if contains($elegant-spacer-keys, $key + '') {
-    @return map-get($elegant-spacers, $key + '');
+@function est-spacing($key) {
+  @if contains($est-spacer-keys, $key + '') {
+    @return map-get($est-spacers, $key + '');
   }
-  @error 'elegant-sass-things error: ' + $key + ' is an invalid spacer. You must use one of the following values when calling elegant-spacing: ' + $elegant-spacer-keys + ' You can configure this list in the $elegant-spacing config map.';
-}
-
-@mixin elegant-v-h($rule, $v-h, $h: null) {
-  @if ($h) {
-    #{$rule}: elegant-spacer-get($v-h) elegant-spacer-get($h);
-  } @else {
-    #{$rule}: elegant-spacer-get($v-h);
-  }
-}
-
-@mixin margin($v-h, $h: null) {
-  @include elegant-v-h('margin', $v-h, $h);
-}
-@mixin margin-top($mult) {
-  margin-top: elegant-spacer-get($mult);
-}
-@mixin margin-right($mult) {
-  margin-right: elegant-spacer-get($mult);
-}
-@mixin margin-bottom($mult) {
-  margin-bottom: elegant-spacer-get($mult);
-}
-@mixin margin-left($mult) {
-  margin-left: elegant-spacer-get($mult);
-}
-@mixin margin-vertical($mult) {
-  margin-top: elegant-spacer-get($mult);
-  margin-bottom: elegant-spacer-get($mult);
-}
-@mixin margin-horizontal($mult) {
-  margin-left: elegant-spacer-get($mult);
-  margin-right: elegant-spacer-get($mult);
-}
-
-@mixin padding($v-h, $h: null) {
-  @include elegant-v-h('padding', $v-h, $h);
-}
-@mixin padding-top($mult) {
-  padding-top: elegant-spacer-get($mult);
-}
-@mixin padding-right($mult) {
-  padding-right: elegant-spacer-get($mult);
-}
-@mixin padding-bottom($mult) {
-  padding-bottom: elegant-spacer-get($mult);
-}
-@mixin padding-left($mult) {
-  padding-left: elegant-spacer-get($mult);
-}
-@mixin padding-vertical($mult) {
-  padding-top: elegant-spacer-get($mult);
-  padding-bottom: elegant-spacer-get($mult);
-}
-@mixin padding-horizontal($mult) {
-  padding-left: elegant-spacer-get($mult);
-  padding-right: elegant-spacer-get($mult);
-}
-
-$elegant-spacers: map-get($elegant-spacing, 'spacers');
-$elegant-spacers: elegant-spacers() !default;
-$elegant-spacer-keys: map-keys($elegant-spacers);
-$elegant-spacer-values: map-values($elegant-spacers);
-
-@function _elegant-spacer-keys() {
-  @return $elegant-spacer-keys;
-}
-
-@function _elegant-spacer-values() {
-  @return $elegant-spacer-values;
+  @error 'elegant-sass-things error: ' + $key + ' is an invalid spacer. You must use one of the following values when calling est-spacing: ' + $est-spacer-keys + ' You can configure this list in the $est-spacing config map.';
 }
