@@ -20,18 +20,18 @@ describe('spacing/_abstracts.scss', () => {
     });
   });
 
-  describe('elegant-spacers', () => {
+  describe('est-spacers', () => {
     it('should respect default spacer map', () => {
       const sassaby = new Sassaby(file);
 
-      sassaby.func('elegant-spacer-get').calledWithArgs('3').equals('3rem');
+      sassaby.func('est-spacing').calledWithArgs('3').equals('3rem');
     });
   });
 
-  describe('elegant-spacer-get', () => {
+  describe('est-spacing', () => {
     const sassaby = new Sassaby(file, {
       variables: {
-        'elegant-spacing': `(
+        'est-spacing': `(
           spacers: (
             'a': 0.5rem,
             'b': 1rem,
@@ -43,12 +43,12 @@ describe('spacing/_abstracts.scss', () => {
     });
 
     it('should get value from spacer map by key', () => {
-      sassaby.func('elegant-spacer-get').calledWithArgs('b').equals('1rem');
+      sassaby.func('est-spacing').calledWithArgs('b').equals('1rem');
     });
 
     it('should raise error if passed invalid key', () => {
       let usageWithInvalidSpacer = () => {
-        sassaby.func('elegant-spacer-get').calledWithArgs('torpedo');
+        sassaby.func('est-spacing').calledWithArgs('torpedo');
       };
 
       assert.throws(usageWithInvalidSpacer, /torpedo is an invalid spacer/);

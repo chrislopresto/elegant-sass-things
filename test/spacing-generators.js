@@ -5,10 +5,10 @@ import Sassaby from 'sassaby';
 describe('spacing/_generators.scss', () => {
   const file = path.resolve(__dirname, '../elegant-sass-things/spacing/_generators.scss');
 
-  describe('generate-elegant-spacing-margin|padding-classes', () => {
+  describe('generate-est-spacing-margin|padding-classes', () => {
     const sassaby = new Sassaby(file, {
       variables: {
-        'elegant-spacing': `(
+        'est-spacing': `(
           spacers: (
             'a': 0.5rem,
             'b': 1rem,
@@ -28,7 +28,7 @@ describe('spacing/_generators.scss', () => {
         it(`should generate ${rule} selector for spacer ${spacer}`, () => {
           let selector = `.${ruleAbbreviation}--${spacer}`;
 
-          sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
+          sassaby.standaloneMixin(`generate-est-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
         });
 
         ['top', 'right', 'bottom', 'left', 'vertical', 'horizontal'].forEach((direction) => {
@@ -36,7 +36,7 @@ describe('spacing/_generators.scss', () => {
           let selector = `.${ruleAbbreviation}-${directionAbbreviation}--${spacer}`;
 
           it(`should generate ${rule} ${direction} selector for spacer ${spacer}`, () => {
-            sassaby.standaloneMixin(`generate-elegant-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
+            sassaby.standaloneMixin(`generate-est-spacing-${rule}-classes`).calledWithArgs().createsSelector(selector);
           })
         });
       });

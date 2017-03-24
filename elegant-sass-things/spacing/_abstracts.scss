@@ -1,4 +1,4 @@
-$elegant-spacing-defaults: (
+$est-spacing-defaults: (
   spacers: (
     '0': 0,
     '1': 1rem,
@@ -11,21 +11,21 @@ $elegant-spacing-defaults: (
   ),
 );
 
-$elegant-spacing: () !default;
-$elegant-spacing: map-merge($elegant-spacing-defaults, $elegant-spacing);
+$est-spacing: () !default;
+$est-spacing: map-merge($est-spacing-defaults, $est-spacing);
 
-$elegant-spacing-breakpoints: map-get($elegant-spacing, 'breakpoints');
-$elegant-spacers: map-get($elegant-spacing, 'spacers');
-$elegant-spacer-keys: map-keys($elegant-spacers);
+$est-spacing-breakpoints: map-get($est-spacing, 'breakpoints');
+$est-spacers: map-get($est-spacing, 'spacers');
+$est-spacer-keys: map-keys($est-spacers);
 
 @function contains($list, $item) {
   @if index($list, $item) { @return true; }
   @return false;
 }
 
-@function elegant-spacer-get($key) {
-  @if contains($elegant-spacer-keys, $key + '') {
-    @return map-get($elegant-spacers, $key + '');
+@function est-spacing($key) {
+  @if contains($est-spacer-keys, $key + '') {
+    @return map-get($est-spacers, $key + '');
   }
-  @error 'elegant-sass-things error: ' + $key + ' is an invalid spacer. You must use one of the following values when calling elegant-spacing: ' + $elegant-spacer-keys + ' You can configure this list in the $elegant-spacing config map.';
+  @error 'elegant-sass-things error: ' + $key + ' is an invalid spacer. You must use one of the following values when calling est-spacing: ' + $est-spacer-keys + ' You can configure this list in the $est-spacing config map.';
 }

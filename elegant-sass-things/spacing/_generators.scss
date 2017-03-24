@@ -1,4 +1,4 @@
-@mixin generate-elegant-spacing-margin-column-classes($name: null) {
+@mixin generate-est-spacing-margin-column-classes($name: null) {
   $name-token: '';
   @if ($name) {
     $name-token: '-' + $name;
@@ -6,42 +6,42 @@
 
   $prefix-token: '';
 
-  @each $spacer-key in $elegant-spacer-keys {
+  @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;
 
     .#{$prefix-token}m#{$name-token}--#{$modifier} {
-      margin: elegant-spacer-get($spacer-key);
+      margin: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-t#{$name-token}--#{$modifier} {
-      margin-top: elegant-spacer-get($spacer-key);
+      margin-top: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-r#{$name-token}--#{$modifier} {
-      margin-right: elegant-spacer-get($spacer-key);
+      margin-right: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-b#{$name-token}--#{$modifier} {
-      margin-bottom: elegant-spacer-get($spacer-key);
+      margin-bottom: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-l#{$name-token}--#{$modifier} {
-      margin-left: elegant-spacer-get($spacer-key);
+      margin-left: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-v#{$name-token}--#{$modifier} {
-      margin-bottom: elegant-spacer-get($spacer-key);
-      margin-top: elegant-spacer-get($spacer-key);
+      margin-bottom: est-spacing($spacer-key);
+      margin-top: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}m-h#{$name-token}--#{$modifier} {
-      margin-left: elegant-spacer-get($spacer-key);
-      margin-right: elegant-spacer-get($spacer-key);
+      margin-left: est-spacing($spacer-key);
+      margin-right: est-spacing($spacer-key);
     }
   }
 }
 
-@mixin generate-elegant-spacing-padding-column-classes($name: null) {
+@mixin generate-est-spacing-padding-column-classes($name: null) {
   $name-token: '';
   @if ($name) {
     $name-token: '-' + $name;
@@ -49,57 +49,57 @@
 
   $prefix-token: '';
 
-  @each $spacer-key in $elegant-spacer-keys {
+  @each $spacer-key in $est-spacer-keys {
     $modifier: $spacer-key;
 
     .#{$prefix-token}p#{$name-token}--#{$modifier} {
-      padding: elegant-spacer-get($spacer-key);
+      padding: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-t#{$name-token}--#{$modifier} {
-      padding-top: elegant-spacer-get($spacer-key);
+      padding-top: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-r#{$name-token}--#{$modifier} {
-      padding-right: elegant-spacer-get($spacer-key);
+      padding-right: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-b#{$name-token}--#{$modifier} {
-      padding-bottom: elegant-spacer-get($spacer-key);
+      padding-bottom: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-l#{$name-token}--#{$modifier} {
-      padding-left: elegant-spacer-get($spacer-key);
+      padding-left: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-v#{$name-token}--#{$modifier} {
-      padding-bottom: elegant-spacer-get($spacer-key);
-      padding-top: elegant-spacer-get($spacer-key);
+      padding-bottom: est-spacing($spacer-key);
+      padding-top: est-spacing($spacer-key);
     }
 
     .#{$prefix-token}p-h#{$name-token}--#{$modifier} {
-      padding-left: elegant-spacer-get($spacer-key);
-      padding-right: elegant-spacer-get($spacer-key);
+      padding-left: est-spacing($spacer-key);
+      padding-right: est-spacing($spacer-key);
     }
   }
 }
 
-@mixin generate-elegant-spacing-margin-classes {
-  @include generate-elegant-spacing-margin-column-classes;
+@mixin generate-est-spacing-margin-classes {
+  @include generate-est-spacing-margin-column-classes;
 
-  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
+  @each $breakpoint-name, $breakpoint-media-query in $est-spacing-breakpoints {
     @media #{$breakpoint-media-query} {
-      @include generate-elegant-spacing-margin-column-classes($name: $breakpoint-name);
+      @include generate-est-spacing-margin-column-classes($name: $breakpoint-name);
     }
   }
 }
 
-@mixin generate-elegant-spacing-padding-classes {
-  @include generate-elegant-spacing-padding-column-classes;
+@mixin generate-est-spacing-padding-classes {
+  @include generate-est-spacing-padding-column-classes;
 
-  @each $breakpoint-name, $breakpoint-media-query in $elegant-spacing-breakpoints {
+  @each $breakpoint-name, $breakpoint-media-query in $est-spacing-breakpoints {
     @media #{$breakpoint-media-query} {
-      @include generate-elegant-spacing-padding-column-classes($name: $breakpoint-name);
+      @include generate-est-spacing-padding-column-classes($name: $breakpoint-name);
     }
   }
 }
